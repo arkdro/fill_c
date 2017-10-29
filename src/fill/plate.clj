@@ -19,3 +19,8 @@
 (def not_same_colors?
   (complement same_colors?))
 
+(defn build_one_point
+  "Build one point"
+  [color_range]
+  (rand-int color_range))
+
