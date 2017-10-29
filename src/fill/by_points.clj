@@ -1,5 +1,5 @@
 (ns fill.by_points
-  (:require [fill.plate]))
+  (:require [fill.plate :as pl]))
 
 (defn step
   "One step of filling"
@@ -12,10 +12,10 @@
 (defn fill
   "Flood fill"
   [node new_color plate]
-  (let [target_color (fill.plate/get_color node plate)]
+  (let [target_color (pl/get_color node plate)]
     (cond
-      (fill.plate/same_colors? target_color new_color) plate
-      (fill.plate/not_same_colors? (fill.plate/get_color node plate) target_color) plate
+      (pl/same_colors? target_color new_color) plate
+      (pl/not_same_colors? (pl/get_color node plate) target_color) plate
       :default (let [queue (conj (clojure.lang.PersistentQueue/EMPTY) node)]
                  (step queue target_color new_color plate)))))
 
