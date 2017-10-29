@@ -11,6 +11,11 @@
    {:keys [data]}]
   (get_color_in_data x y data))
 
+(defn set_color_in_data
+  "Set the color of a point at the specified location"
+  [x y color data]
+  (assoc-in data [y x] color))
+
 (defn same_colors?
   "Compare two colors"
   [c1 c2]
