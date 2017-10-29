@@ -6,3 +6,11 @@
    {:keys [data] :as plate}]
   (get-in data [y x]))
 
+(defn same_colors?
+  "Compare two colors"
+  [c1 c2]
+  (= c1 c2))
+
+(def not_same_colors?
+  (complement same_colors?))
+
