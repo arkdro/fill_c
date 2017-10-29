@@ -14,8 +14,8 @@
   [node new_color plate]
   (let [target_color (fill.plate/get_color node plate)]
     (cond
-      (same_colors? target_color new_color) plate
-      (not_same_colors? (fill.plate/get_color node plate) target_color) plate
+      (fill.plate/same_colors? target_color new_color) plate
+      (fill.plate/not_same_colors? (fill.plate/get_color node plate) target_color) plate
       :default (let [queue (conj (clojure.lang.PersistentQueue/EMPTY) node)]
                  (step queue target_color new_color plate)))))
 
