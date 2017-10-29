@@ -1,4 +1,6 @@
 (ns fill.core
+  (:require [fill.by_points]
+            [fill.plate])
   (:gen-class))
 
 (defn get_random_color
@@ -9,14 +11,12 @@
 (defn run
   "Get params and run fill"
   [color_range width height]
-  (let [data (create_data color_range width height)
-        plate {:color_range color_range
-               :width width
-               :height height
-               :data data}
+  (let [plate (fill.plate/build_plate {:color_range color_range
+                                       :width width
+                                       :height height})
         node {:x 0
               :y 0}
-        new_color (get_random_color color_range)]
+        new_color (fill.plate/build_one_point color_range)]
     (fill.by_points/fill node new_color plate)))
 
 (defn -main
