@@ -34,3 +34,12 @@
   [width color_range]
   (vec (repeatedly width #(build_one_point color_range))))
 
+(defn make_different_starts
+  "Make sure that two starting points are different"
+  [color_range width height data]
+  (let [cur1 (get_color_in_data 0 0 data)
+        cur2 (get_color_in_data (dec width) (dec height) data)]
+    (if (same_colors? cur1 cur2)
+      (let [new_color (mod (inc cur1) color_range)] ; might give some edge to one side
+        (set_color_in_data 0 0 new_color data)))))
+
