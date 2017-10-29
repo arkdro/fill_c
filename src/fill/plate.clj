@@ -1,10 +1,15 @@
 (ns fill.plate)
 
+(defn get_color_in_data
+  "Get the color of a raw data at the specified location"
+  [x y data]
+  (get-in data [y x]))
+
 (defn get_color
   "Get the color of a node in a plate"
-  [{:keys [x y] :as node}
-   {:keys [data] :as plate}]
-  (get-in data [y x]))
+  [{:keys [x y]}
+   {:keys [data]}]
+  (get_color_in_data x y data))
 
 (defn same_colors?
   "Compare two colors"
