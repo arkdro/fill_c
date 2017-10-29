@@ -24,3 +24,8 @@
   [color_range]
   (rand-int color_range))
 
+(defn build_one_line
+  "Build one line"
+  [width color_range]
+  (vec (repeatedly width #(build_one_point color_range))))
+
