@@ -1,13 +1,23 @@
 (ns fill.by_points
   (:require [fill.plate :as pl]))
 
+(defn process_one_node
+  "Extract one node from a queue and do the filling for it"
+  [queue target_color new_color plate]
+  (assert false "not implemented"))
+
 (defn step
   "One step of filling"
   [queue
    target_color
    new_color
    {:keys [width height data] :as plate}]
-  (assert false "not implemented"))
+  (if (empty? queue) plate
+      (let [[new_queue new_plate] (process_one_node queue
+                                                    target_color
+                                                    new_color
+                                                    plate)]
+        (recur new_queue target_color new_color new_plate))))
 
 (defn fill
   "Flood fill"
