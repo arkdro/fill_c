@@ -70,3 +70,9 @@
   [{x :x}]
   (<= x 0))
 
+(defn end_of_line?
+  "Check if the node is at the end of a line"
+  [{x :x}
+   {width :width}]
+  (> x width))
+
