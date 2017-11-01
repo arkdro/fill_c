@@ -66,7 +66,10 @@
 (defn process_one_node
   "Extract one node from a queue and do the filling for it"
   [queue target_color new_color plate]
-  (assert false "not implemented"))
+  (let [[node shortened_queue] (take_item_out_of_queue queue)
+        begin (find_begin_of_cut node target_color plate)
+        end (find_end_of_cut node target_color plate)]
+    (iterate_cut begin end shortened_queue target_color plate)))
 
 (defn step
   "One step of filling"
