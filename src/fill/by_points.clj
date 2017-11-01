@@ -1,6 +1,13 @@
 (ns fill.by_points
   (:require [fill.plate :as pl]))
 
+(defn take_item_out_of_queue
+  "Take the item out of a queue. The queue must contain something"
+  [queue]
+  (let [item (peek queue)
+        rest (pop queue)]
+    [item rest]))
+
 ;; TODO remove duplicated code in 'find_xxxxx_of_cut'
 (defn find_begin_of_cut
   "Decrease the coordinate until the color of the node no longer matches
