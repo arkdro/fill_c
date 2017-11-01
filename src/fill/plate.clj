@@ -89,6 +89,11 @@
    {height :height}]
   (>= y (dec height)))
 
+(defn bottom_line?
+  "Check if the node is at the bottom of a plate"
+  [{y :y}]
+  (<= y 0))
+
 (defn previous_node
   "Decrease the x coordinate of a node"
   [node]
