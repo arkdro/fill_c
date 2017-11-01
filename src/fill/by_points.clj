@@ -1,6 +1,16 @@
 (ns fill.by_points
   (:require [fill.plate :as pl]))
 
+;; TODO remove duplicated code in 'find_xxxxx_of_cut'
+(defn find_begin_of_cut
+  "Decrease the coordinate until the color of the node no longer matches
+  the target color"
+  [node target_color plate]
+  (cond
+    (pl/beginning_of_line? node) node
+    (pl/not_same_colors? node target_color plate) node
+    :default (recur (pl/previous_node node) target_color plate)))
+
 (defn find_end_of_cut
   "Increase the coordinate until the color of the node no longer matches
   the target color"
