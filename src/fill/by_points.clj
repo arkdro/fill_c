@@ -1,6 +1,11 @@
 (ns fill.by_points
   (:require [fill.plate :as pl]))
 
+(defn cut_done?
+  "Check if the begin point is not after the end point"
+  [begin end]
+  (pl/first_not_after_second? begin end))
+
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
   [queue]
