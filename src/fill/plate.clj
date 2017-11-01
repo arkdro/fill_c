@@ -76,3 +76,8 @@
    {width :width}]
   (> x width))
 
+(defn previous_node
+  "Decrease the x coordinate of a node"
+  [node]
+  (update node :x dec))
+
