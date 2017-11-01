@@ -28,6 +28,15 @@
         (conj queue lower_node)
         queue))))
 
+(defn iterate_cut
+  "Go through all the nodes from begin to end: set color, enqueue adjacent"
+  [begin end queue target_color plate]
+  (if (cut_done? begin end) [queue plate]
+      (let [new_plate (pl/set_color begin target_color plate)
+            queue2 (add_upper_node begin queue target_color plate)
+            queue3 (add_lower_node begin queue2 target_color plate)]
+        (recur (pl/next_node begin) end queue3 target_color new_plate))))
+
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
   [queue]
