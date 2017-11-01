@@ -83,6 +83,12 @@
    {width :width}]
   (>= x (dec width)))
 
+(defn top_line?
+  "Check if the node is at the top of a plate"
+  [{y :y}
+   {height :height}]
+  (>= y (dec height)))
+
 (defn previous_node
   "Decrease the x coordinate of a node"
   [node]
