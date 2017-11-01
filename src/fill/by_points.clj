@@ -17,6 +17,17 @@
         (conj queue upper_node)
         queue))))
 
+(defn add_lower_node
+  "If the color of the lower node is the target color
+  then add that node to the queue"
+  [node queue target_color plate]
+  (if (pl/bottom_line? node plate)
+    queue
+    (let [lower_node (pl/lower_node node)]
+      (if (pl/same_colors? lower_node target_color plate)
+        (conj queue lower_node)
+        queue))))
+
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
   [queue]
