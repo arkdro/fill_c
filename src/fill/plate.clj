@@ -1,5 +1,10 @@
 (ns fill.plate)
 
+;; 4-way connectivity. Used by get upper/lower node.
+;; Coordinates increase:
+;; x - left to right
+;; y - bottom to up
+
 (defn get_color_in_data
   "Get the color of a raw data at the specified location"
   [x y data]
