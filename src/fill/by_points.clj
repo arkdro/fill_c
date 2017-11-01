@@ -6,6 +6,17 @@
   [begin end]
   (pl/first_not_after_second? begin end))
 
+(defn add_upper_node
+  "If the color of the upper node is the target color
+  then add that node to the queue"
+  [node queue target_color plate]
+  (if (pl/top_line? node plate)
+    queue
+    (let [upper_node (pl/upper_node node)]
+      (if (pl/same_colors? upper_node target_color plate)
+        (conj queue upper_node)
+        queue))))
+
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
   [queue]
