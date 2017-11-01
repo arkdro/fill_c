@@ -104,6 +104,11 @@
   [node]
   (update node :x inc))
 
+(defn upper_node
+  "Increase the y coordinate of a node"
+  [node]
+  (update node :y inc))
+
 (defn first_not_after_second?
   "Check if the first point is not after the second"
   [{x1 :x} {x2 :x}]
