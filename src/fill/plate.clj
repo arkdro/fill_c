@@ -81,7 +81,7 @@
   "Check if the node is at the end of a line"
   [{x :x}
    {width :width}]
-  (> x width))
+  (>= x (dec width)))
 
 (defn previous_node
   "Decrease the x coordinate of a node"
