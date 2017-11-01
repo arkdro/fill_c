@@ -65,3 +65,8 @@
      :cur2 cur2
      :data data}))
 
+(defn beginning_of_line?
+  "Check if the node is at the beginning of a line"
+  [{x :x}]
+  (<= x 0))
+
