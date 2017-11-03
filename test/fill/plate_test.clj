@@ -29,3 +29,12 @@
           exp [[1 3 5] [2 4 6] [10 11 23]]]
       (is (= act exp)))))
 
+(deftest set_color_test
+  (testing "set color"
+    (let [node {:x 2 :y 1}
+          color 23
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
+          act (set_color node color plate)
+          exp {:data [[1 3 5] [2 4 23] [10 11 12]]}]
+      (is (= act exp)))))
+
