@@ -25,8 +25,9 @@
   "Set the color of a point at the specified location in a plate"
   [{:keys [x y]}
    color
-   {:keys [data]}]
-  (set_color_in_data x y color data))
+   {:keys [data] :as plate}]
+  (let [new_data (set_color_in_data x y color data)]
+    (assoc plate :data new_data)))
 
 (defn same_colors?
   "Compare two colors"
