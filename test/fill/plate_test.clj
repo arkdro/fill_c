@@ -19,3 +19,13 @@
           exp 5]
       (is (= act exp)))))
 
+(deftest set_color_in_data_test
+  (testing "set color in data"
+    (let [x 2
+          y 2
+          color 23
+          data [[1 3 5] [2 4 6] [10 11 12]]
+          act (set_color_in_data x y color data)
+          exp [[1 3 5] [2 4 6] [10 11 23]]]
+      (is (= act exp)))))
+
