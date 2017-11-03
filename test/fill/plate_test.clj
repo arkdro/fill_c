@@ -11,3 +11,11 @@
           exp 2]
       (is (= act exp)))))
 
+(deftest get_color_test
+  (testing "get color"
+    (let [node {:x 2 :y 0}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
+          act (get_color node plate)
+          exp 5]
+      (is (= act exp)))))
+
