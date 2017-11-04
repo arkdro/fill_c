@@ -91,3 +91,17 @@
           exp [[0 3 5] [2 4 6] [10 9 11]]]
       (is (= act exp)))))
 
+(deftest beginning_of_line?_test1
+  (testing "beginning of the line, 1"
+    (let [node {:x 0, :y 2}
+          act (beginning_of_line? node)
+          exp true]
+      (is (= act exp)))))
+
+(deftest beginning_of_line?_test2
+  (testing "beginning of the line, 2"
+    (let [node {:x 1, :y 2}
+          act (beginning_of_line? node)
+          exp false]
+      (is (= act exp)))))
+
