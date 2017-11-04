@@ -137,3 +137,18 @@
           exp false]
       (is (= act exp)))))
 
+(deftest bottom_line?_test1
+  (testing "is bottom line, 1"
+    (let [node {:x 0, :y 2}
+          act (bottom_line? node)
+          exp false]
+      (is (= act exp)))))
+
+(deftest bottom_line?_test2
+  (testing "is bottom line, 2"
+    (let [node {:x 1, :y 0}
+          act (bottom_line? node)
+          exp true]
+      (is (= act exp)))))
+
+
