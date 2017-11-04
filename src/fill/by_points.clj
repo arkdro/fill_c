@@ -45,10 +45,19 @@
     [item rest]))
 
 ;; TODO remove duplicated code in 'find_xxxxx_of_cut'
+(defn- find_begin_of_cut_aux
+  [prev_node node target_color plate]
+  (cond
+    (pl/not_same_colors? node target_color plate) prev_node
+    (pl/beginning_of_line? node) node
+    :default (recur node (pl/left_node node) target_color plate)))
+
 (defn find_begin_of_cut
   "Decrease the coordinate until the color of the node no longer matches
   the target color"
   [node target_color plate]
+  (find_begin_of_cut_aux node node target_color plate))
+
   (cond
     (pl/beginning_of_line? node) node
     (pl/not_same_colors? node target_color plate) node
