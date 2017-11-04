@@ -81,3 +81,13 @@
           exp true]
       (is (= act exp)))))
 
+(deftest make_different_starts_test
+  (testing "make different starts"
+    (let [color_range 12
+          width 3
+          height 3
+          data [[11 3 5] [2 4 6] [10 9 11]]
+          act (make_different_starts color_range width height data)
+          exp [[0 3 5] [2 4 6] [10 9 11]]]
+      (is (= act exp)))))
+
