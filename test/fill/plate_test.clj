@@ -105,3 +105,19 @@
           exp false]
       (is (= act exp)))))
 
+(deftest end_of_line?_test1
+  (testing "end of the line, 1"
+    (let [node {:x 0, :y 2}
+          plate {:width 3}
+          act (end_of_line? node plate)
+          exp false]
+      (is (= act exp)))))
+
+(deftest end_of_line?_test2
+  (testing "end of the line, 2"
+    (let [node {:x 2, :y 2}
+          plate {:width 3}
+          act (end_of_line? node plate)
+          exp true]
+      (is (= act exp)))))
+
