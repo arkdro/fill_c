@@ -14,7 +14,7 @@
 (deftest find_begin_of_cut_test2
   (testing "find begin of cut, 2"
     (let [node {:x 1, :y 0}
-          target_color 4
+          target_color 3
           plate {:data [[1 3 3 1 2]]
                  :width 5}
           act (find_begin_of_cut node target_color plate)
@@ -24,7 +24,7 @@
 (deftest find_begin_of_cut_test3
   (testing "find begin of cut, 3"
     (let [node {:x 2, :y 0}
-          target_color 4
+          target_color 3
           plate {:data [[1 3 3 1 2]]
                  :width 5}
           act (find_begin_of_cut node target_color plate)
