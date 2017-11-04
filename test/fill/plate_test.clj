@@ -172,4 +172,11 @@
           exp {:x 1, :y 3}]
       (is (= act exp)))))
 
+(deftest lower_node_test
+  (testing "lower node test"
+    (let [node {:x 1, :y 2}
+          act (lower_node node)
+          exp {:x 1, :y 1}]
+      (is (= act exp)))))
+
 
