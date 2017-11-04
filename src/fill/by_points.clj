@@ -58,19 +58,18 @@
   [node target_color plate]
   (find_begin_of_cut_aux node node target_color plate))
 
+(defn find_end_of_cut_aux
+  [prev_node node target_color plate]
   (cond
-    (pl/beginning_of_line? node) node
-    (pl/not_same_colors? node target_color plate) node
-    :default (recur (pl/left_node node) target_color plate)))
+    (pl/not_same_colors? node target_color plate) prev_node
+    (pl/end_of_line? node plate) node
+    :default (recur node (pl/right_node node) target_color plate)))
 
 (defn find_end_of_cut
   "Increase the coordinate until the color of the node no longer matches
   the target color"
   [node target_color plate]
-  (cond
-    (pl/end_of_line? node plate) node
-    (pl/not_same_colors? node target_color plate) node
-    :default (recur (pl/right_node node) target_color plate)))
+  (find_end_of_cut_aux node node target_color plate))
 
 (defn process_one_node
   "Extract one node from a queue and do the filling for it"
