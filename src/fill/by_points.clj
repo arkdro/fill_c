@@ -58,7 +58,7 @@
   [node target_color plate]
   (find_begin_of_cut_aux node node target_color plate))
 
-(defn find_end_of_cut_aux
+(defn- find_end_of_cut_aux
   [prev_node node target_color plate]
   (cond
     (pl/not_same_colors? node target_color plate) prev_node
