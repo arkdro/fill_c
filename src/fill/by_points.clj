@@ -52,7 +52,7 @@
   (cond
     (pl/beginning_of_line? node) node
     (pl/not_same_colors? node target_color plate) node
-    :default (recur (pl/previous_node node) target_color plate)))
+    :default (recur (pl/left_node node) target_color plate)))
 
 (defn find_end_of_cut
   "Increase the coordinate until the color of the node no longer matches

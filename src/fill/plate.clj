@@ -100,7 +100,7 @@
   [{y :y}]
   (<= y 0))
 
-(defn previous_node
+(defn left_node
   "Decrease the x coordinate of a node"
   [node]
   (update node :x dec))
