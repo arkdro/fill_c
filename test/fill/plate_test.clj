@@ -158,4 +158,11 @@
           exp {:x 0, :y 0}]
       (is (= act exp)))))
 
+(deftest next_node_test
+  (testing "next node test"
+    (let [node {:x 1, :y 2}
+          act (next_node node)
+          exp {:x 2, :y 2}]
+      (is (= act exp)))))
+
 
