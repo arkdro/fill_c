@@ -179,4 +179,20 @@
           exp {:x 1, :y 1}]
       (is (= act exp)))))
 
+(deftest first_not_after_second?_test1
+  (testing "first not after second node, 1"
+    (let [node1 {:x 2, :y 1}
+          node2 {:x 2, :y 1}
+          act (first_not_after_second? node1 node2)
+          exp true]
+      (is (= act exp)))))
+
+(deftest first_not_after_second?_test2
+  (testing "first not after second node, 2"
+    (let [node1 {:x 3, :y 2}
+          node2 {:x 2, :y 2}
+          act (first_not_after_second? node1 node2)
+          exp false]
+      (is (= act exp)))))
+
 
