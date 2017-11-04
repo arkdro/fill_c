@@ -38,3 +38,46 @@
           exp {:data [[1 3 5] [2 4 23] [10 11 12]]}]
       (is (= act exp)))))
 
+(deftest same_colors_test1
+  (testing "same color?/2, 2"
+    (let [color1 1
+          color2 2
+          act (same_colors? color1 color2)
+          exp false]
+      (is (= act exp)))))
+
+(deftest same_colors_test2
+  (testing "same color?/2"
+    (let [color1 1
+          color2 1
+          act (same_colors? color1 color2)
+          exp true]
+      (is (= act exp)))))
+
+(deftest same_colors_test3
+  (testing "same color?/3"
+    (let [node {:x 1, :y 2}
+          target_color 2
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
+          act (same_colors? node target_color plate)
+          exp false]
+      (is (= act exp)))))
+
+(deftest same_colors_test4
+  (testing "same color?/3"
+    (let [node {:x 1, :y 2}
+          target_color 11
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
+          act (same_colors? node target_color plate)
+          exp true]
+      (is (= act exp)))))
+
+(deftest not_same_colors_test1
+  (testing "not same color?/3"
+    (let [node {:x 1, :y 2}
+          target_color 2
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
+          act (not_same_colors? node target_color plate)
+          exp true]
+      (is (= act exp)))))
+
