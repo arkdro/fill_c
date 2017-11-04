@@ -121,3 +121,19 @@
           exp true]
       (is (= act exp)))))
 
+(deftest top_line?_test1
+  (testing "is top line, 1"
+    (let [node {:x 0, :y 2}
+          plate {:height 3}
+          act (top_line? node plate)
+          exp true]
+      (is (= act exp)))))
+
+(deftest top_line?_test2
+  (testing "is top line, 2"
+    (let [node {:x 0, :y 0}
+          plate {:height 3}
+          act (top_line? node plate)
+          exp false]
+      (is (= act exp)))))
+
