@@ -51,3 +51,13 @@
           exp {:x 3, :y 1}]
       (is (= act exp)))))
 
+(deftest find_end_of_cut_test3
+  (testing "find end of cut, 3"
+    (let [node {:x 4, :y 1}
+          target_color 6
+          plate {:data [[1 3 5 1 2] [4 4 4 2 6]]
+                 :width 5}
+          act (find_end_of_cut node target_color plate)
+          exp {:x 4, :y 1}]
+      (is (= act exp)))))
+
