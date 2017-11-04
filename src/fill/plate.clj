@@ -105,7 +105,7 @@
   [node]
   (update node :x dec))
 
-(defn next_node
+(defn right_node
   "Increase the x coordinate of a node"
   [node]
   (update node :x inc))

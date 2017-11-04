@@ -158,10 +158,10 @@
           exp {:x 0, :y 0}]
       (is (= act exp)))))
 
-(deftest next_node_test
-  (testing "next node test"
+(deftest right_node_test
+  (testing "right node test"
     (let [node {:x 1, :y 2}
-          act (next_node node)
+          act (right_node node)
           exp {:x 2, :y 2}]
       (is (= act exp)))))
 
