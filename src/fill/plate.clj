@@ -37,7 +37,7 @@
    (let [color (get_color node plate)]
      (= color target_color))))
 
-(def not_same_colors?
+(def different_colors?
   (complement same_colors?))
 
 (defn build_one_point

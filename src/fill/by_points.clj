@@ -48,7 +48,7 @@
 (defn- find_begin_of_cut_aux
   [prev_node node target_color plate]
   (cond
-    (pl/not_same_colors? node target_color plate) prev_node
+    (pl/different_colors? node target_color plate) prev_node
     (pl/beginning_of_line? node) node
     :default (recur node (pl/left_node node) target_color plate)))
 
@@ -61,7 +61,7 @@
 (defn- find_end_of_cut_aux
   [prev_node node target_color plate]
   (cond
-    (pl/not_same_colors? node target_color plate) prev_node
+    (pl/different_colors? node target_color plate) prev_node
     (pl/end_of_line? node plate) node
     :default (recur node (pl/right_node node) target_color plate)))
 
@@ -98,7 +98,7 @@
   (let [target_color (pl/get_color node plate)]
     (cond
       (pl/same_colors? target_color new_color) plate
-      (pl/not_same_colors? (pl/get_color node plate) target_color) plate
+      (pl/different_colors? (pl/get_color node plate) target_color) plate
       :default (let [queue (conj (clojure.lang.PersistentQueue/EMPTY) node)]
                  (step queue target_color new_color plate)))))
 

@@ -72,12 +72,12 @@
           exp true]
       (is (= act exp)))))
 
-(deftest not_same_colors_test1
+(deftest different_colors_test1
   (testing "not same color?/3"
     (let [node {:x 1, :y 2}
           target_color 2
           plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
-          act (not_same_colors? node target_color plate)
+          act (different_colors? node target_color plate)
           exp true]
       (is (= act exp)))))
 
