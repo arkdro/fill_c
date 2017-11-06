@@ -2,9 +2,9 @@
   (:require [fill.plate :as pl]))
 
 (defn cut_done?
-  "Check if the begin point is not after the end point"
+  "Check if the begin point is after the end point"
   [begin end]
-  (pl/first_not_after_second? begin end))
+  (pl/first_after_second? begin end))
 
 (defn add_upper_node
   "If the color of the upper node is the target color
