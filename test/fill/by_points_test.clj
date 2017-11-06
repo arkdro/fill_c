@@ -77,3 +77,33 @@
           exp true]
       (is (= act exp)))))
 
+(deftest add_upper_node_test1
+  (testing "add upper node, 1"
+    (let [node {:x 2, :y 1}
+          queue (clojure.lang.PersistentQueue/EMPTY)
+          target_color 4
+          plate {:data [[1 3 5 1 2] [4 4 4 2 6] [5 3 4 1 1]]
+                 :width 5
+                 :height 3}
+          new_queue (add_upper_node node queue target_color plate)
+          item (peek new_queue)
+          rest (pop new_queue)
+          act [item rest]
+          exp [{:x 2, :y 2} ()]]
+      (is (= act exp)))))
+
+(deftest add_upper_node_test2
+  (testing "add upper node, 2"
+    (let [node {:x 1, :y 2}
+          queue (clojure.lang.PersistentQueue/EMPTY)
+          target_color 3
+          plate {:data [[1 3 5 1 2] [4 4 4 2 6] [5 3 4 1 1]]
+                 :width 5
+                 :height 3}
+          new_queue (add_upper_node node queue target_color plate)
+          item (peek new_queue)
+          rest (pop new_queue)
+          act [item rest]
+          exp [nil ()]]
+      (is (= act exp)))))
+
