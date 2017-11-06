@@ -61,3 +61,19 @@
           exp {:x 4, :y 1}]
       (is (= act exp)))))
 
+(deftest cut_done?_test1
+  (testing "cut done, 1"
+    (let [node1 {:x 5, :y 1}
+          node2 {:x 5, :y 1}
+          act (cut_done? node1 node2)
+          exp false]
+      (is (= act exp)))))
+
+(deftest cut_done?_test2
+  (testing "cut done, 2"
+    (let [node1 {:x 6, :y 1}
+          node2 {:x 5, :y 1}
+          act (cut_done? node1 node2)
+          exp true]
+      (is (= act exp)))))
+
