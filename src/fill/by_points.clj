@@ -21,7 +21,7 @@
   "If the color of the lower node is the target color
   then add that node to the queue"
   [node queue target_color plate]
-  (if (pl/bottom_line? node plate)
+  (if (pl/bottom_line? node)
     queue
     (let [lower_node (pl/lower_node node)]
       (if (pl/same_colors? lower_node target_color plate)
