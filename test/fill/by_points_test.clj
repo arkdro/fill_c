@@ -137,3 +137,21 @@
           exp [nil ()]]
       (is (= act exp)))))
 
+(deftest iterate_cut_test
+  (testing "iterate cut"
+    (let [begin {:x 0, :y 1}
+          end {:x 2, :y 1}
+          queue (clojure.lang.PersistentQueue/EMPTY)
+          target_color 4
+          plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+                 :width 5
+                 :height 3}
+          [new_queue act_plate] (iterate_cut begin end queue target_color plate)
+          act_seq (seq new_queue)
+          exp_seq [{:x 0, :y 0} {:x 2, :y 2}]
+          exp_plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+                     :width 5
+                     :height 3}]
+      (is (= act_seq exp_seq))
+      (is (= act_plate exp_plate)))))
+
