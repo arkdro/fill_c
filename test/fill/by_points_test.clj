@@ -180,3 +180,19 @@
       (is (= act_seq exp_seq))
       (is (= act_plate exp_plate)))))
 
+(deftest step_test
+  (testing "process one node"
+    (let [node {:x 2, :y 1}
+          empty_queue (clojure.lang.PersistentQueue/EMPTY)
+          queue (conj empty_queue node)
+          old_color 4
+          new_color 6
+          plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+                 :width 5
+                 :height 3}
+          act (step queue old_color new_color plate)
+          exp {:data [[6 3 5 1 6] [6 6 6 2 6] [5 3 6 1 1]]
+               :width 5
+               :height 3}]
+      (is (= act exp)))))
+
