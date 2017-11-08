@@ -99,7 +99,7 @@
   (let [old_color (pl/get_color node plate)]
     (cond
       (pl/same_colors? old_color new_color) plate
-      (pl/different_colors? (pl/get_color node plate) old_color) plate
+      (pl/different_colors? (pl/get_color node plate) old_color) plate ; :-/
       :default (let [queue (conj (clojure.lang.PersistentQueue/EMPTY) node)]
                  (step queue old_color new_color plate)))))
 
