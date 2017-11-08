@@ -143,13 +143,16 @@
           end {:x 2, :y 1}
           queue (clojure.lang.PersistentQueue/EMPTY)
           old_color 4
+          new_color 6
           plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          [new_queue act_plate] (iterate_cut begin end queue old_color plate)
+          [new_queue act_plate] (iterate_cut begin end queue
+                                             old_color new_color
+                                             plate)
           act_seq (seq new_queue)
           exp_seq [{:x 0, :y 0} {:x 2, :y 2}]
-          exp_plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+          exp_plate {:data [[4 3 5 1 6] [6 6 6 2 6] [5 3 4 1 1]]
                      :width 5
                      :height 3}]
       (is (= act_seq exp_seq))
@@ -167,11 +170,11 @@
                  :height 3}
           [new_queue act_plate] (process_one_node queue
                                                   old_color
-                                                  new_color ; unused?
+                                                  new_color
                                                   plate)
           act_seq (seq new_queue)
           exp_seq [{:x 0, :y 0} {:x 2, :y 2}]
-          exp_plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+          exp_plate {:data [[4 3 5 1 6] [6 6 6 2 6] [5 3 4 1 1]]
                      :width 5
                      :height 3}]
       (is (= act_seq exp_seq))
