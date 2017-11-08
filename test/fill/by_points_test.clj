@@ -196,3 +196,16 @@
                :height 3}]
       (is (= act exp)))))
 
+(deftest fill_test
+  (testing "fill"
+    (let [node {:x 2, :y 1}
+          new_color 6
+          plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
+                 :width 5
+                 :height 3}
+          act (fill node new_color plate)
+          exp {:data [[6 3 5 1 6] [6 6 6 2 6] [5 3 6 1 1]]
+               :width 5
+               :height 3}]
+      (is (= act exp)))))
+
