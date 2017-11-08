@@ -34,8 +34,9 @@
   (if (cut_done? begin end) [queue plate]
       (let [new_plate (pl/set_color begin old_color plate)
             queue2 (add_upper_node begin queue old_color plate)
-            queue3 (add_lower_node begin queue2 old_color plate)]
-        (recur (pl/right_node begin) end queue3 old_color new_plate))))
+            queue3 (add_lower_node begin queue2 old_color plate)
+            next_node (pl/right_node begin)]
+        (recur next_node end queue3 old_color new_plate))))
 
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
