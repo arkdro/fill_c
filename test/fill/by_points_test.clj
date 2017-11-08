@@ -181,7 +181,7 @@
       (is (= act_plate exp_plate)))))
 
 (deftest step_test
-  (testing "process one node"
+  (testing "step"
     (let [node {:x 2, :y 1}
           empty_queue (clojure.lang.PersistentQueue/EMPTY)
           queue (conj empty_queue node)
