@@ -57,27 +57,27 @@
 (deftest same_colors_test3
   (testing "same color?/3"
     (let [node {:x 1, :y 2}
-          target_color 2
+          old_color 2
           plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
-          act (same_colors? node target_color plate)
+          act (same_colors? node old_color plate)
           exp false]
       (is (= act exp)))))
 
 (deftest same_colors_test4
   (testing "same color?/3"
     (let [node {:x 1, :y 2}
-          target_color 11
+          old_color 11
           plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
-          act (same_colors? node target_color plate)
+          act (same_colors? node old_color plate)
           exp true]
       (is (= act exp)))))
 
 (deftest different_colors_test1
   (testing "not same color?/3"
     (let [node {:x 1, :y 2}
-          target_color 2
+          old_color 2
           plate {:data [[1 3 5] [2 4 6] [10 11 12]]}
-          act (different_colors? node target_color plate)
+          act (different_colors? node old_color plate)
           exp true]
       (is (= act exp)))))
 

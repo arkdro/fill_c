@@ -5,59 +5,59 @@
 (deftest find_begin_of_cut_test1
   (testing "find begin of cut, 1"
     (let [node {:x 1, :y 1}
-          target_color 4
+          old_color 4
           plate {:data [[1 3 5 1 2] [4 4 4 2 6] [1 2 2 1 1]]}
-          act (find_begin_of_cut node target_color plate)
+          act (find_begin_of_cut node old_color plate)
           exp {:x 0, :y 1}]
       (is (= act exp)))))
 
 (deftest find_begin_of_cut_test2
   (testing "find begin of cut, 2"
     (let [node {:x 1, :y 0}
-          target_color 3
+          old_color 3
           plate {:data [[1 3 3 1 2]]
                  :width 5}
-          act (find_begin_of_cut node target_color plate)
+          act (find_begin_of_cut node old_color plate)
           exp {:x 1, :y 0}]
       (is (= act exp)))))
 
 (deftest find_begin_of_cut_test3
   (testing "find begin of cut, 3"
     (let [node {:x 2, :y 0}
-          target_color 3
+          old_color 3
           plate {:data [[1 3 3 1 2]]
                  :width 5}
-          act (find_begin_of_cut node target_color plate)
+          act (find_begin_of_cut node old_color plate)
           exp {:x 1, :y 0}]
       (is (= act exp)))))
 
 (deftest find_end_of_cut_test1
   (testing "find end of cut, 1"
     (let [node {:x 1, :y 1}
-          target_color 4
+          old_color 4
           plate {:data [[1 3 5 1 2] [4 4 4 2 6] [1 2 2 1 1]]
                  :width 5}
-          act (find_end_of_cut node target_color plate)
+          act (find_end_of_cut node old_color plate)
           exp {:x 2, :y 1}]
       (is (= act exp)))))
 
 (deftest find_end_of_cut_test2
   (testing "find end of cut, 2"
     (let [node {:x 3, :y 1}
-          target_color 2
+          old_color 2
           plate {:data [[1 3 5 1 2] [4 4 4 2 6]]
                  :width 5}
-          act (find_end_of_cut node target_color plate)
+          act (find_end_of_cut node old_color plate)
           exp {:x 3, :y 1}]
       (is (= act exp)))))
 
 (deftest find_end_of_cut_test3
   (testing "find end of cut, 3"
     (let [node {:x 4, :y 1}
-          target_color 6
+          old_color 6
           plate {:data [[1 3 5 1 2] [4 4 4 2 6]]
                  :width 5}
-          act (find_end_of_cut node target_color plate)
+          act (find_end_of_cut node old_color plate)
           exp {:x 4, :y 1}]
       (is (= act exp)))))
 
@@ -81,11 +81,11 @@
   (testing "add upper node, 1"
     (let [node {:x 2, :y 1}
           queue (clojure.lang.PersistentQueue/EMPTY)
-          target_color 4
+          old_color 4
           plate {:data [[1 3 5 1 2] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          new_queue (add_upper_node node queue target_color plate)
+          new_queue (add_upper_node node queue old_color plate)
           item (peek new_queue)
           rest (pop new_queue)
           act [item rest]
@@ -96,11 +96,11 @@
   (testing "add upper node, 2"
     (let [node {:x 1, :y 2}
           queue (clojure.lang.PersistentQueue/EMPTY)
-          target_color 3
+          old_color 3
           plate {:data [[1 3 5 1 2] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          new_queue (add_upper_node node queue target_color plate)
+          new_queue (add_upper_node node queue old_color plate)
           item (peek new_queue)
           rest (pop new_queue)
           act [item rest]
@@ -111,11 +111,11 @@
   (testing "add lower node, 1"
     (let [node {:x 4, :y 1}
           queue (clojure.lang.PersistentQueue/EMPTY)
-          target_color 6
+          old_color 6
           plate {:data [[1 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          new_queue (add_lower_node node queue target_color plate)
+          new_queue (add_lower_node node queue old_color plate)
           item (peek new_queue)
           rest (pop new_queue)
           act [item rest]
@@ -126,11 +126,11 @@
   (testing "add lower node, 2"
     (let [node {:x 4, :y 0}
           queue (clojure.lang.PersistentQueue/EMPTY)
-          target_color 6
+          old_color 6
           plate {:data [[1 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          new_queue (add_lower_node node queue target_color plate)
+          new_queue (add_lower_node node queue old_color plate)
           item (peek new_queue)
           rest (pop new_queue)
           act [item rest]
@@ -142,11 +142,11 @@
     (let [begin {:x 0, :y 1}
           end {:x 2, :y 1}
           queue (clojure.lang.PersistentQueue/EMPTY)
-          target_color 4
+          old_color 4
           plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
-          [new_queue act_plate] (iterate_cut begin end queue target_color plate)
+          [new_queue act_plate] (iterate_cut begin end queue old_color plate)
           act_seq (seq new_queue)
           exp_seq [{:x 0, :y 0} {:x 2, :y 2}]
           exp_plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
@@ -160,13 +160,13 @@
     (let [node {:x 2, :y 1}
           empty_queue (clojure.lang.PersistentQueue/EMPTY)
           queue (conj empty_queue node)
-          target_color 4
+          old_color 4
           new_color 6
           plate {:data [[4 3 5 1 6] [4 4 4 2 6] [5 3 4 1 1]]
                  :width 5
                  :height 3}
           [new_queue act_plate] (process_one_node queue
-                                                  target_color
+                                                  old_color
                                                   new_color ; unused?
                                                   plate)
           act_seq (seq new_queue)

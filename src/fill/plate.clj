@@ -33,9 +33,9 @@
   "Compare two colors"
   ([c1 c2]
    (= c1 c2))
-  ([node target_color plate]
+  ([node old_color plate]
    (let [color (get_color node plate)]
-     (= color target_color))))
+     (= color old_color))))
 
 (def different_colors?
   (complement same_colors?))

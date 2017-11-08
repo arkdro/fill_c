@@ -9,33 +9,33 @@
 (defn add_upper_node
   "If the color of the upper node is the target color
   then add that node to the queue"
-  [node queue target_color plate]
+  [node queue old_color plate]
   (if (pl/top_line? node plate)
     queue
     (let [upper_node (pl/upper_node node)]
-      (if (pl/same_colors? upper_node target_color plate)
+      (if (pl/same_colors? upper_node old_color plate)
         (conj queue upper_node)
         queue))))
 
 (defn add_lower_node
   "If the color of the lower node is the target color
   then add that node to the queue"
-  [node queue target_color plate]
+  [node queue old_color plate]
   (if (pl/bottom_line? node)
     queue
     (let [lower_node (pl/lower_node node)]
-      (if (pl/same_colors? lower_node target_color plate)
+      (if (pl/same_colors? lower_node old_color plate)
         (conj queue lower_node)
         queue))))
 
 (defn iterate_cut
   "Go through all the nodes from begin to end: set color, enqueue adjacent"
-  [begin end queue target_color plate]
+  [begin end queue old_color plate]
   (if (cut_done? begin end) [queue plate]
-      (let [new_plate (pl/set_color begin target_color plate)
-            queue2 (add_upper_node begin queue target_color plate)
-            queue3 (add_lower_node begin queue2 target_color plate)]
-        (recur (pl/right_node begin) end queue3 target_color new_plate))))
+      (let [new_plate (pl/set_color begin old_color plate)
+            queue2 (add_upper_node begin queue old_color plate)
+            queue3 (add_lower_node begin queue2 old_color plate)]
+        (recur (pl/right_node begin) end queue3 old_color new_plate))))
 
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
@@ -46,59 +46,59 @@
 
 ;; TODO remove duplicated code in 'find_xxxxx_of_cut'
 (defn- find_begin_of_cut_aux
-  [prev_node node target_color plate]
+  [prev_node node old_color plate]
   (cond
-    (pl/different_colors? node target_color plate) prev_node
+    (pl/different_colors? node old_color plate) prev_node
     (pl/beginning_of_line? node) node
-    :default (recur node (pl/left_node node) target_color plate)))
+    :default (recur node (pl/left_node node) old_color plate)))
 
 (defn find_begin_of_cut
   "Decrease the coordinate until the color of the node no longer matches
   the target color"
-  [node target_color plate]
-  (find_begin_of_cut_aux node node target_color plate))
+  [node old_color plate]
+  (find_begin_of_cut_aux node node old_color plate))
 
 (defn- find_end_of_cut_aux
-  [prev_node node target_color plate]
+  [prev_node node old_color plate]
   (cond
-    (pl/different_colors? node target_color plate) prev_node
+    (pl/different_colors? node old_color plate) prev_node
     (pl/end_of_line? node plate) node
-    :default (recur node (pl/right_node node) target_color plate)))
+    :default (recur node (pl/right_node node) old_color plate)))
 
 (defn find_end_of_cut
   "Increase the coordinate until the color of the node no longer matches
   the target color"
-  [node target_color plate]
-  (find_end_of_cut_aux node node target_color plate))
+  [node old_color plate]
+  (find_end_of_cut_aux node node old_color plate))
 
 (defn process_one_node
   "Extract one node from a queue and do the filling for it"
-  [queue target_color new_color plate]
+  [queue old_color new_color plate]
   (let [[node shortened_queue] (take_item_out_of_queue queue)
-        begin (find_begin_of_cut node target_color plate)
-        end (find_end_of_cut node target_color plate)]
-    (iterate_cut begin end shortened_queue target_color plate)))
+        begin (find_begin_of_cut node old_color plate)
+        end (find_end_of_cut node old_color plate)]
+    (iterate_cut begin end shortened_queue old_color plate)))
 
 (defn step
   "One step of filling"
   [queue
-   target_color
+   old_color
    new_color
    {:keys [width height data] :as plate}]
   (if (empty? queue) plate
       (let [[new_queue new_plate] (process_one_node queue
-                                                    target_color
+                                                    old_color
                                                     new_color
                                                     plate)]
-        (recur new_queue target_color new_color new_plate))))
+        (recur new_queue old_color new_color new_plate))))
 
 (defn fill
   "Flood fill"
   [node new_color plate]
-  (let [target_color (pl/get_color node plate)]
+  (let [old_color (pl/get_color node plate)]
     (cond
-      (pl/same_colors? target_color new_color) plate
-      (pl/different_colors? (pl/get_color node plate) target_color) plate
+      (pl/same_colors? old_color new_color) plate
+      (pl/different_colors? (pl/get_color node plate) old_color) plate
       :default (let [queue (conj (clojure.lang.PersistentQueue/EMPTY) node)]
-                 (step queue target_color new_color plate)))))
+                 (step queue old_color new_color plate)))))
 
