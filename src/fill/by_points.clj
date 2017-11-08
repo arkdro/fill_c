@@ -30,13 +30,13 @@
 
 (defn iterate_cut
   "Go through all the nodes from begin to end: set color, enqueue adjacent"
-  [begin end queue old_color plate]
+  [begin end queue old_color new_color plate]
   (if (cut_done? begin end) [queue plate]
-      (let [new_plate (pl/set_color begin old_color plate)
+      (let [new_plate (pl/set_color begin new_color plate)
             queue2 (add_upper_node begin queue old_color plate)
             queue3 (add_lower_node begin queue2 old_color plate)
             next_node (pl/right_node begin)]
-        (recur next_node end queue3 old_color new_plate))))
+        (recur next_node end queue3 old_color new_color new_plate))))
 
 (defn take_item_out_of_queue
   "Take the item out of a queue. The queue must contain something"
@@ -78,7 +78,7 @@
   (let [[node shortened_queue] (take_item_out_of_queue queue)
         begin (find_begin_of_cut node old_color plate)
         end (find_end_of_cut node old_color plate)]
-    (iterate_cut begin end shortened_queue old_color plate)))
+    (iterate_cut begin end shortened_queue old_color new_color plate)))
 
 (defn step
   "One step of filling"
