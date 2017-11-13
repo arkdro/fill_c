@@ -1,8 +1,9 @@
 (ns fill.request)
 
 (defn generate_one_request
-  ""
-  []
+  "Generate one request for a fill"
+  [width height color_range]
+  (rand-int color_range)
   )
 
 (defn write_request
