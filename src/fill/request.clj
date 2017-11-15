@@ -16,6 +16,11 @@
   (let [amount (Math/round (* (+ width height) 0.5))]
     (repeatedly amount #(build_one_step width height color_range))))
 
+(defn build_expected_plate
+  ""
+  [steps plate]
+  plate)
+
 (defn generate_one_request
   "Generate one request for a fill"
   [width height color_range]
