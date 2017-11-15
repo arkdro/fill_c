@@ -66,8 +66,8 @@
     color_range :color_range}]
   (let [data (doall (vec (repeatedly height #(build_one_line width color_range))))
         data2 (make_different_starts color_range width height data)
-        cur1 (get_color_in_data 0 0 width height data)
-        cur2 (get_color_in_data (dec width) (dec height) width height data)]
+        cur1 (get_color_in_data 0 0 data)
+        cur2 (get_color_in_data (dec width) (dec height) data)]
     {:width width
      :height height
      :color_range color_range
