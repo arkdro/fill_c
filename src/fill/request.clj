@@ -17,10 +17,16 @@
   (let [amount (Math/round (* (+ width height) 0.5))]
     (repeatedly amount #(build_one_step width height color_range))))
 
+(defn apply_one_step
+  "Apply one step to a plate"
+  [plate {node :point
+          color :color}]
+  (fill.by_points/fill node color plate))
+
 (defn build_expected_plate
-  ""
+  "Build the expected plate by applying steps to the input plate"
   [steps plate]
-  plate)
+  (reduce apply_one_step plate steps))
 
 (defn generate_one_request
   "Generate one request for a fill"
