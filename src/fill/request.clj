@@ -14,7 +14,7 @@
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
-  (let [amount (Math/round (* (+ width height) 1))]
+  (let [amount (Math/round (* (+ width height) 1.0))]
     (repeatedly amount #(build_one_step width height color_range))))
 
 (defn apply_one_step
