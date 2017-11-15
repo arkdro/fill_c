@@ -1,5 +1,21 @@
 (ns fill.request)
 
+(defn build_one_step
+  "Build one step for a request"
+  [width height color_range]
+  (let [x (rand-int width)
+        y (rand-int height)
+        color (rand-int color_range)
+        point {:x x, :y y}]
+    {:point point
+     :color color}))
+
+(defn build_steps
+  "Build steps for a request"
+  [width height color_range]
+  (let [amount (Math/round (* (+ width height) 0.5))]
+    (repeatedly amount #(build_one_step width height color_range))))
+
 (defn generate_one_request
   "Generate one request for a fill"
   [width height color_range]
