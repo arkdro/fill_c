@@ -1,4 +1,5 @@
-(ns fill.request)
+(ns fill.request
+  (:require [cheshire.core :as che]))
 
 (defn build_one_step
   "Build one step for a request"
@@ -24,8 +25,15 @@
 (defn generate_one_request
   "Generate one request for a fill"
   [width height color_range]
-  (rand-int color_range)
-  )
+  (let [plate (fill.plate/build_plate {:color_range color_range
+                                       :width width
+                                       :height height})
+        steps (build_steps width height color_range)
+        expected (build_expected_plate steps plate)
+        request {:steps steps
+                 :input_data plate
+                 :expected_data expected}]
+    (che/generate-string request)))
 
 (defn write_request
   "Write a request to a file"
