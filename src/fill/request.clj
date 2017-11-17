@@ -51,8 +51,8 @@
 (defn write_request
   "Write a request to a file"
   [dir idx request]
-  (println dir idx request)
-  )
+  (let [filename (build_file_name dir idx)]
+    (spit filename request)))
 
 (defn generate_requests
   "Create a bunch of request files in the specified directory"
