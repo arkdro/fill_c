@@ -1,4 +1,5 @@
-(ns fill.generator)
+(ns fill.generator
+  (:require [fill.request]))
 
 (defn random_in_range
   "Generate random number between min (inclusive) and max (exclusive)"
