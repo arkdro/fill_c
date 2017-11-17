@@ -1,6 +1,7 @@
 (ns fill.core
   (:require [clojure.tools.cli :refer [parse-opts]])
   (:require [fill.by_points]
+            [fill.generator]
             [fill.plate])
   (:gen-class))
 
@@ -66,5 +67,5 @@
         help (get-in opts [:options :help])]
     (if help
       (println (get opts :summary))
-      )))
+      (fill.generator/generate-requests opts))))
 
