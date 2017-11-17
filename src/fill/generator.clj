@@ -27,12 +27,15 @@
   [{:keys [min-width max-width
            min-height max-height
            min-color-range max-color-range
-           num-request]
+           dir num-request]
     :as opts}]
   (if (> num-request 0)
-    (let [
-          width ()
-          new_opts (update opts :num-request dec)
-          ]
+    (let [width (generate_width min-width max-width)
+          height (generate_height min-height max-height)
+          color_range (generate_color_range min-color-range max-color-range)
+          opts2 (update opts :num-request dec)
+          idx (get opts :idx 0)
+          new_opts (assoc opts :idx (inc idx))]
+      (fill.request/generate_request dir idx width height color_range)
       (recur new_opts))))
 
