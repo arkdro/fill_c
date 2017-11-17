@@ -61,3 +61,9 @@
     (let [request (generate_one_request width height color_range)]
       (write_request dir idx request))))
 
+(defn generate_request
+  "Create a request file in the specified directory"
+  [dir idx width height color_range]
+  (let [request (generate_one_request width height color_range)]
+    (write_request dir idx request)))
+
