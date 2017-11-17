@@ -41,7 +41,7 @@
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
    ["-d" "--dir DIR" "output directory for requests"
-    :default "."
+    :default "\".\""
     :validate [string? "Must be string"]]
 
    ;; A non-idempotent option
