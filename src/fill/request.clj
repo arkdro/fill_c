@@ -1,5 +1,6 @@
 (ns fill.request
-  (:require [cheshire.core :as che]))
+  (:require [cheshire.core :as che])
+  (:require [clojure.java.io]))
 
 (defn build_one_step
   "Build one step for a request"
@@ -40,6 +41,12 @@
                  :input_data plate
                  :expected_data expected}]
     (che/generate-string request)))
+
+(defn build_file_name
+  "Create a file name using a dir and a sequence number"
+  [dir idx]
+  (let [file (format "req-%08d.json" idx)]
+    (.getPath (clojure.java.io/file dir file))))
 
 (defn write_request
   "Write a request to a file"
