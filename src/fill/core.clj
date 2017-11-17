@@ -40,6 +40,9 @@
     :default 1
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
+   ["-d" "--dir DIR" "output directory for requests"
+    :default "."
+    :validate [string? "Must be string"]]
 
    ;; A non-idempotent option
    ["-v" nil "Verbosity level"
