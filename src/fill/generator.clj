@@ -1,5 +1,12 @@
 (ns fill.generator)
 
+(defn random_in_range
+  "Generate random number between min (inclusive) and max (exclusive)"
+  [min max]
+  (let [delta (- max min)
+        rand (rand-int delta)]
+    (+ min rand)))
+
 (defn generate-requests
   "Generate requests"
   [{:keys [min-width max-width
