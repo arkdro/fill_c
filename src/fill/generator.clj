@@ -7,6 +7,21 @@
         rand (rand-int delta)]
     (+ min rand)))
 
+(defn generate_width
+  "Generate random width"
+  [min max]
+  (random_in_range min max))
+
+(defn generate_height
+  "Generate random height"
+  [min max]
+  (random_in_range min max))
+
+(defn generate_color_range
+  "Generate random color range"
+  [min max]
+  (random_in_range min max))
+
 (defn generate-requests
   "Generate requests"
   [{:keys [min-width max-width
