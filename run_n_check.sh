@@ -10,7 +10,6 @@ do_one_dir(){
 		--min-color-range $min_color_range --max-color-range $max_color_range"
     checker_params="--remove --indir $dir"
     $generator $generator_params
-    sleep 30
     $checker $checker_params
 }
 
