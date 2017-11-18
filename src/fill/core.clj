@@ -29,11 +29,11 @@
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
    [nil "--min-color-range N" "minimal color range"
-    :default 2
+    :default 4
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
    [nil "--max-color-range N" "maximal color range"
-    :default 2
+    :default 10
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
    ["-n" "--num-request N" "number of requests"
