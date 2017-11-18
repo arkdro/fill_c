@@ -1,4 +1,6 @@
 (ns fill.request
+  (:require [fill.by_points]
+            [fill.plate])
   (:require [cheshire.core :as che])
   (:require [clojure.java.io]))
 
