@@ -50,6 +50,7 @@
     :default 0
     :assoc-fn (fn [m k _] (update-in m [k] inc))]
    ;; A boolean option defaulting to nil
+   ["-p" "--pretty"]
    ["-h" "--help"]])
 
 (defn run

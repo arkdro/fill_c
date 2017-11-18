@@ -31,7 +31,7 @@
 
 (defn generate_one_request
   "Generate one request for a fill"
-  [width height color_range]
+  [width height color_range & [json_opts]]
   (let [plate (fill.plate/build_plate {:color_range color_range
                                        :width width
                                        :height height})
@@ -40,7 +40,7 @@
         request {:steps steps
                  :input_data plate
                  :expected_data expected}]
-    (che/generate-string request)))
+    (che/generate-string request json_opts)))
 
 (defn build_file_name
   "Create a file name using a dir and a sequence number"
@@ -63,7 +63,7 @@
 
 (defn generate_request
   "Create a request file in the specified directory"
-  [dir idx width height color_range]
-  (let [request (generate_one_request width height color_range)]
+  [dir idx width height color_range json_opts]
+  (let [request (generate_one_request width height color_range json_opts)]
     (write_request dir idx request)))
 

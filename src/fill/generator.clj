@@ -29,12 +29,13 @@
    {:keys [min-width max-width
            min-height max-height
            min-color-range max-color-range
-           dir]
+           dir pretty]
     :as opts}]
   (let [width (generate_width min-width max-width)
         height (generate_height min-height max-height)
-        color_range (generate_color_range min-color-range max-color-range)]
-    (fill.request/generate_request dir idx width height color_range)))
+        color_range (generate_color_range min-color-range max-color-range)
+        json_opts {:pretty pretty}]
+    (fill.request/generate_request dir idx width height color_range json_opts)))
 
 (defn generate-requests
   "Generate randomized requests"
