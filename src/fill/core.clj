@@ -67,8 +67,9 @@
   "Parse command line arguments and run the generator"
   [& args]
   (let [opts (parse-opts args cli-options)
+        options (get opts :options)
         help (get-in opts [:options :help])]
     (if help
       (println (get opts :summary))
-      (fill.generator/generate-requests opts))))
+      (fill.generator/generate-requests options))))
 
