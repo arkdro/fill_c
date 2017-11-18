@@ -12,27 +12,27 @@
 
 (def cli-options
   ;; An option with a required argument
-  [["-w1" "--min-width N" "minimal width"
+  [[nil "--min-width N" "minimal width"
     :default 4
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
-   ["-w2" "--max-width N" "maximal width"
+   [nil "--max-width N" "maximal width"
     :default 10
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
-   ["-h1" "--min-height N" "minimal height"
+   [nil "--min-height N" "minimal height"
     :default 4
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
-   ["-h2" "--max-height N" "maximal height"
+   [nil "--max-height N" "maximal height"
     :default 10
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
-   ["-r1" "--min-color-range N" "minimal color range"
+   [nil "--min-color-range N" "minimal color range"
     :default 2
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
-   ["-r2" "--max-color-range N" "maximal color range"
+   [nil "--max-color-range N" "maximal color range"
     :default 2
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
