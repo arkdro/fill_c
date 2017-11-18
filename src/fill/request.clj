@@ -15,7 +15,8 @@
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
-  (let [amount (Math/round (* (+ width height) 1.0))]
+  (let [max (+ width height color_range)
+        amount (rand-int max)]
     (repeatedly amount #(build_one_step width height color_range))))
 
 (defn apply_one_step
