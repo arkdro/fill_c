@@ -14,11 +14,22 @@
     {:point point
      :color color}))
 
+(defn generate_amount_of_steps
+  "Generate amount of steps: 80% N, 10% 2*N, 10% 4*N"
+  [width height color_range]
+  (let [max (+ width height color_range)
+        choice (rand-int 100)
+        multiplier (cond
+                     (< choice 80) 1
+                     (< choice 90) 2
+                     :default 4)]
+    (rand-int (* multiplier max))))
+
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
   (let [max (+ width height color_range)
-        amount (rand-int max)]
+        amount (generate_amount_of_steps width height color_range)]
     (repeatedly amount #(build_one_step width height color_range))))
 
 (defn apply_one_step
