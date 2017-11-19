@@ -14,6 +14,14 @@
     {:point point
      :color color}))
 
+(defn duplicate_step
+  "Build a step with the same coordinates, but the different color"
+  [color_range
+   {color :color :as point}]
+  (let [new_color (rand-int color_range)]
+    (if (= color new_color) (duplicate_step color_range point)
+        (assoc point :color new_color))))
+
 (defn generate_amount_of_steps
   "Generate amount of steps: 80% N, 10% 2*N, 10% 4*N"
   [width height color_range]
