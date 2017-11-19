@@ -40,6 +40,12 @@
         new_step (duplicate_step color_range step)]
     (cons new_step acc)))
 
+(defn add_new_step
+  "Add a new step to the accumulator"
+  [acc width height color_range]
+  (let [step (build_one_step width height color_range)]
+    (cons step acc)))
+
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
