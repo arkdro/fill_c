@@ -33,6 +33,13 @@
                      :default 4)]
     (rand-int (* multiplier max))))
 
+(defn add_duplicated_step
+  "Add a duplicated step to the accumulator"
+  [acc color_range]
+  (let [step (first acc)
+        new_step (duplicate_step color_range step)]
+    (cons new_step acc)))
+
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
