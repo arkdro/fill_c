@@ -32,7 +32,7 @@ batches=10
 n=0
 while ((n<batches))
 do
-    echo "batch: $n"
+    echo "batch: $n, `date`"
     dir="${base}/$n"
     mkdir -p "$dir"
     do_one_dir "$dir"
