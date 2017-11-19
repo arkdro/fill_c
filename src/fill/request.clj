@@ -54,11 +54,18 @@
              (< repeat 20)) (add_duplicated_step acc color_range)
         (add_new_step acc width height color_range))))
 
+(defn build_steps_aux
+  ""
+  [i acc width height color_range]
+  (if (<= i 0) acc
+      (let [new_acc (add_step acc width height color_range)]
+        (recur (dec i) new_acc width height color_range))))
+
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
   (let [amount (generate_amount_of_steps width height color_range)]
-    (repeatedly amount #(build_one_step width height color_range))))
+    (build_steps_aux amount '() width height color_range)))
 
 (defn apply_one_step
   "Apply one step to a plate"
