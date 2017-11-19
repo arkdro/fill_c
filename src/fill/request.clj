@@ -20,8 +20,8 @@
   (let [max (+ width height color_range)
         choice (rand-int 100)
         multiplier (cond
-                     (< choice 80) 1
-                     (< choice 90) 2
+                     (< choice 90) 1
+                     (< choice 97) 2
                      :default 4)]
     (rand-int (* multiplier max))))
 
