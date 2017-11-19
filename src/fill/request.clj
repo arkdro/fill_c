@@ -46,6 +46,14 @@
   (let [step (build_one_step width height color_range)]
     (cons step acc)))
 
+(defn add_step
+  "Add a step (new or duplicated) to the accumulator"
+  [acc width height color_range]
+  (let [repeat (rand-int 100)]
+    (if (and (seq acc)
+             (< repeat 20)) (add_duplicated_step acc color_range)
+        (add_new_step acc width height color_range))))
+
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
