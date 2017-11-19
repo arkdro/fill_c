@@ -28,8 +28,7 @@
 (defn build_steps
   "Build steps for a request"
   [width height color_range]
-  (let [max (+ width height color_range)
-        amount (generate_amount_of_steps width height color_range)]
+  (let [amount (generate_amount_of_steps width height color_range)]
     (repeatedly amount #(build_one_step width height color_range))))
 
 (defn apply_one_step
