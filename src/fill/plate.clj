@@ -59,25 +59,6 @@
       (let [new_color (mod (inc cur1) color_range)] ; might give some edge to one side
         (set_color_in_data 0 0 new_color data)))))
 
-(defn build_plate
-  "Build a plate filled with colored points"
-  [{width :width
-    height :height
-    color_range :color_range}]
-  (let [data (doall (vec (repeatedly height #(build_one_line width color_range))))
-        data2 (make_different_starts color_range width height data)
-        cur1 (get_color_in_data 0 0 data)
-        cur2 (get_color_in_data (dec width) (dec height) data)]
-    {:width width
-     :height height
-     :color_range color_range
-     :total_size (* width height)
-     :size1 1
-     :size2 1
-     :cur1 cur1
-     :cur2 cur2
-     :data data}))
-
 (defn beginning_of_line?
   "Check if the node is at the beginning of a line"
   [{x :x}]
@@ -207,4 +188,25 @@
     (<= probability 0) data
     (>= probability 100) data
     :default (increase_domains_aux width height data probability)))
+
+(defn build_plate
+  "Build a plate filled with colored points"
+  [{width :width
+    height :height
+    color_range :color_range}
+   {:keys [probability] :as opts}]
+  (let [data (doall (vec (repeatedly height #(build_one_line width color_range))))
+        data_increased_domains (increase_domains width height data probability)
+        data2 (make_different_starts color_range width height data)
+        cur1 (get_color_in_data 0 0 data)
+        cur2 (get_color_in_data (dec width) (dec height) data)]
+    {:width width
+     :height height
+     :color_range color_range
+     :total_size (* width height)
+     :size1 1
+     :size2 1
+     :cur1 cur1
+     :cur2 cur2
+     :data data}))
 
