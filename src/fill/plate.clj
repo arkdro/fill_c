@@ -187,3 +187,24 @@
                                                     plate source target)]
     new_plate))
 
+(defn increase_domains_aux
+  [width height data probability]
+  (let [plate {:width width
+               :height height
+               :data data}
+        coords (for [x (range width) y (range height)] {:x x, :y y})
+        new_plate (reduce
+                  #(duplicate_adjacent_point probability %1 %2)
+                  plate coords)
+        new_data (get new_plate :data)]
+    new_data))
+
+(defn increase_domains
+  "Iterate over all points of data and duplicate an adjacent one
+  in dependence of probability"
+  [width height data probability]
+  (cond
+    (<= probability 0) data
+    (>= probability 100) data
+    :default (increase_domains_aux width height data probability)))
+
