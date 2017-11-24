@@ -149,3 +149,13 @@
   (if (not (beginning_of_line? node))
     (left_node node)))
 
+(defn get_adjacent_coordinates
+  "Get coordinates of adjacent nodes"
+  [node plate]
+  (let [upper (get_upper_node node plate)
+        lower (get_lower_node node)
+        right (get_right_node node plate)
+        left (get_left_node node)
+        non_nil (filter #(some? %) [lower upper left right])]
+    non_nil))
+
