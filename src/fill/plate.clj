@@ -125,3 +125,27 @@
   [{x1 :x} {x2 :x}]
   (> x1 x2))
 
+(defn get_upper_node
+  "Get coordinates of the upper node, if possible"
+  [node plate]
+  (if (not (top_line? node plate))
+    (upper_node node)))
+
+(defn get_lower_node
+  "Get coordinates of the lower node, if possible"
+  [node]
+  (if (not (bottom_line? node))
+    (lower_node node)))
+
+(defn get_right_node
+  "Get coordinates of the right node, if possible"
+  [node plate]
+  (if (not (end_of_line? node plate))
+    (right_node node)))
+
+(defn get_left_node
+  "Get coordinates of the left node, if possible"
+  [node]
+  (if (not (beginning_of_line? node))
+    (left_node node)))
+
