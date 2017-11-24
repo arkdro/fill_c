@@ -78,6 +78,12 @@
   [steps plate]
   (reduce apply_one_step plate steps))
 
+(defn generate_json_string
+  "Generate json string using provided options"
+  [request {pretty :pretty}]
+  (let [json_opts {:pretty pretty}]
+    (che/generate-string request json_opts)))
+
 (defn generate_one_request
   "Generate one request for a fill"
   [width height color_range & [json_opts]]
@@ -89,7 +95,7 @@
         request {:steps steps
                  :input_data plate
                  :expected_data expected}]
-    (che/generate-string request json_opts)))
+    (generate_json_string request json_opts)))
 
 (defn build_file_name
   "Create a file name using a dir and a sequence number"
