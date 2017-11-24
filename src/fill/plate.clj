@@ -171,3 +171,10 @@
   (let [color (get_color source plate)]
     (set_color target color plate)))
 
+(defn duplicate_point_with_probability
+  "Copy color from a source node to a target node with some probability"
+  [probability plate source target]
+  (let [x (rand-int 100)]
+    (if (> x probability) plate
+        (duplicate_point plate source target))))
+
