@@ -159,3 +159,10 @@
         non_nil (filter #(some? %) [lower upper left right])]
     non_nil))
 
+(defn choose_node_to_duplicate
+  "Choose one of nodes to duplicate"
+  [nodes]
+  (let [len (count nodes)
+        idx (rand-int len)]
+    (nth nodes idx)))
+
