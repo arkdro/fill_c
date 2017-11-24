@@ -166,3 +166,8 @@
         idx (rand-int len)]
     (nth nodes idx)))
 
+(defn duplicate_point
+  [plate source target]
+  (let [color (get_color source plate)]
+    (set_color target color plate)))
+
