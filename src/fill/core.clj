@@ -36,6 +36,11 @@
     :default 10
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
+   [nil "--probability N" "probability of duplicating adjacent color, 0...100"
+    :default 0
+    :parse-fn #(Integer/parseInt %)
+    :validate [#(< 0 %) "Must not be smaller than 0"
+               #(> 100 %) "Must not be bigger than 100"]]
    ["-n" "--num-request N" "number of requests"
     :default 1
     :parse-fn #(Integer/parseInt %)
