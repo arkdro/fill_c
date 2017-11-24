@@ -178,3 +178,12 @@
     (if (> x probability) plate
         (duplicate_point plate source target))))
 
+(defn duplicate_adjacent_point
+  "Duplicate some adjacent point using probability"
+  [probability plate target]
+  (let [adjacent (get_adjacent_coordinates target plate)
+        source (choose_node_to_duplicate adjacent)
+        new_plate (duplicate_point_with_probability probability
+                                                    plate source target)]
+    new_plate))
+
