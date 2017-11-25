@@ -191,7 +191,7 @@
   [width height data probability]
   (cond
     (<= probability 0) data
-    (>= probability 100) data
+    (> probability 100) data
     :default (increase_domains_aux width height data probability)))
 
 (defn build_plate
