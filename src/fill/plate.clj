@@ -210,7 +210,7 @@
      :height height
      :color_range color_range
      :total_size (* width height)
-     :size1 1
+     :size1 1 ;; FIXME count the real size, because it might be bigger than 1
      :size2 1
      :cur1 cur1
      :cur2 cur2
