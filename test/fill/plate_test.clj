@@ -195,4 +195,24 @@
           exp true]
       (is (= act exp)))))
 
+(deftest get_upper_node_test1
+  (testing "get upper node, 1"
+    (let [node {:x 2, :y 1}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_upper_node node plate)
+          exp {:x 2, :y 2}]
+      (is (= act exp)))))
+
+(deftest get_upper_node_test2
+  (testing "get upper node, 2"
+    (let [node {:x 1, :y 2}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_upper_node node plate)
+          exp nil]
+      (is (= act exp)))))
+
 
