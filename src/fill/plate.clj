@@ -140,12 +140,17 @@
         non_nil (filter #(some? %) [lower upper left right])]
     non_nil))
 
-(defn choose_node_to_duplicate
-  "Choose one of nodes to duplicate"
+(defn choose_node_to_duplicate_aux
   [nodes]
   (let [len (count nodes)
         idx (rand-int len)]
     (nth nodes idx)))
+
+(defn choose_node_to_duplicate
+  "Choose one of nodes to duplicate"
+  [nodes]
+  (if (seq nodes) (choose_node_to_duplicate_aux nodes)
+      nil))
 
 (defn duplicate_point
   [plate source target]
