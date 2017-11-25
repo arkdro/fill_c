@@ -1,4 +1,4 @@
-(defproject fill "0.1.0-SNAPSHOT"
+(defproject fill "0.0.2-SNAPSHOT"
   :description "Flood fill"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
