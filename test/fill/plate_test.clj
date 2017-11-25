@@ -346,4 +346,18 @@
                :height 3}]
       (is (= act exp)))))
 
+(deftest increase_domains_aux_test
+  (testing "increase domain aux"
+    (let [width 3
+          height 3
+          data [[1 3 5]
+                [2 4 6]
+                [10 11 12]]
+          probability 100
+          act (increase_domains_aux width height data probability)
+          exp [[1 1 1]
+               [1 1 1]
+               [1 1 1]]]
+      (is (= act exp)))))
+
 
