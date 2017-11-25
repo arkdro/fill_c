@@ -333,4 +333,17 @@
                :height 3}]
       (is (= act exp)))))
 
+(deftest duplicate_adjacent_point_test
+  (testing "duplicate adjacent point"
+    (let [target {:x 0, :y 2}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          probability 100
+          act (duplicate_adjacent_point probability plate target)
+          exp {:data [[1 3 5] [2 4 6] [2 11 12]]
+               :width 3
+               :height 3}]
+      (is (= act exp)))))
+
 
