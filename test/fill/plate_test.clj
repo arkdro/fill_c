@@ -91,6 +91,16 @@
           exp [[0 3 5] [2 4 6] [10 9 11]]]
       (is (= act exp)))))
 
+(deftest make_different_starts_test2
+  (testing "make different starts, 2"
+    (let [color_range 12
+          width 3
+          height 3
+          data [[1 3 5] [2 4 6] [10 9 11]]
+          act (make_different_starts color_range width height data)
+          exp [[1 3 5] [2 4 6] [10 9 11]]]
+      (is (= act exp)))))
+
 (deftest beginning_of_line?_test1
   (testing "beginning of the line, 1"
     (let [node {:x 0, :y 2}
