@@ -275,4 +275,34 @@
           exp nil]
       (is (= act exp)))))
 
+(deftest get_smaller_adjacent_coordinates_test1
+  (testing "get smaller adjacent coordinates, 1"
+    (let [node {:x 0, :y 0}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_smaller_adjacent_coordinates node plate)
+          exp []]
+      (is (= act exp)))))
+
+(deftest get_smaller_adjacent_coordinates_test2
+  (testing "get smaller adjacent coordinates, 2"
+    (let [node {:x 0, :y 1}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_smaller_adjacent_coordinates node plate)
+          exp [{:x 0, :y 0}]]
+      (is (= act exp)))))
+
+(deftest get_smaller_adjacent_coordinates_test3
+  (testing "get smaller adjacent coordinates, 3"
+    (let [node {:x 2, :y 2}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_smaller_adjacent_coordinates node plate)
+          exp [{:x 2, :y 1} {:x 1, :y 2}]]
+      (is (= act exp)))))
+
 
