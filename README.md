@@ -13,16 +13,16 @@ an expected 2d array of number.
 
 ## Options
 
--d | --dir <directory> - where to store generated request files
--n | --num-request N - number of requests to generate
---min-width N - minimal width of the 2d data array
---max-width N - maximal width of the 2d data array
---min-height N - minimal height of the 2d data array
---max-height N - maximal height of the 2d data array
---min-color-range N - minimal color range to use for data points
---max-color-range N - maximal color range to use for data points
---probability N - probability of duplicating adjacent points, 0...100
---pretty - pretty print requests
+* -d | --dir <directory> - where to store generated request files
+* -n | --num-request N - number of requests to generate
+* --min-width N - minimal width of the 2d data array
+* --max-width N - maximal width of the 2d data array
+* --min-height N - minimal height of the 2d data array
+* --max-height N - maximal height of the 2d data array
+* --min-color-range N - minimal color range to use for data points
+* --max-color-range N - maximal color range to use for data points
+* --probability N - probability of duplicating adjacent points, 0...100
+* --pretty - pretty print requests
 
 ## Examples
 
