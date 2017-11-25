@@ -28,7 +28,7 @@ an expected 2d array of number.
 
 Check 'run_n_check.sh' script to see usage example.
 
-### Bugs
+## Bugs
 
 ## License
 
