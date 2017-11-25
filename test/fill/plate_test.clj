@@ -255,4 +255,24 @@
           exp nil]
       (is (= act exp)))))
 
+(deftest get_left_node_test1
+  (testing "get left node, 1"
+    (let [node {:x 1, :y 1}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_left_node node)
+          exp {:x 0, :y 1}]
+      (is (= act exp)))))
+
+(deftest get_left_node_test2
+  (testing "get left node, 2"
+    (let [node {:x 0, :y 1}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          act (get_left_node node)
+          exp nil]
+      (is (= act exp)))))
+
 
