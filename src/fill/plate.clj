@@ -130,14 +130,14 @@
   (if (not (beginning_of_line? node))
     (left_node node)))
 
-(defn get_adjacent_coordinates
-  "Get coordinates of adjacent nodes"
+(defn get_smaller_adjacent_coordinates
+  "Get coordinates of adjacent nodes from smaller sides"
   [node plate]
-  (let [upper (get_upper_node node plate)
+  (let [;; upper (get_upper_node node plate)
         lower (get_lower_node node)
-        right (get_right_node node plate)
+        ;; right (get_right_node node plate)
         left (get_left_node node)
-        non_nil (filter #(some? %) [lower upper left right])]
+        non_nil (filter #(some? %) [lower left])]
     non_nil))
 
 (defn choose_node_to_duplicate_aux
@@ -167,11 +167,11 @@
 (defn duplicate_adjacent_point
   "Duplicate some adjacent point using probability"
   [probability plate target]
-  (let [adjacent (get_adjacent_coordinates target plate)
-        source (choose_node_to_duplicate adjacent)
-        new_plate (duplicate_point_with_probability probability
-                                                    plate source target)]
-    new_plate))
+  (let [adjacent (get_smaller_adjacent_coordinates target plate)
+        source (choose_node_to_duplicate adjacent)]
+    (if (some? source) (duplicate_point_with_probability probability
+                                                         plate source target)
+        plate)))
 
 (defn increase_domains_aux
   [width height data probability]
