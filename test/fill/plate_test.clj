@@ -305,4 +305,32 @@
           exp [{:x 2, :y 1} {:x 1, :y 2}]]
       (is (= act exp)))))
 
+(deftest duplicate_point_with_probability_test1
+  (testing "duplicate point with probability, 1"
+    (let [source {:x 0, :y 1}
+          target {:x 0, :y 2}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          probability 100
+          act (duplicate_point_with_probability probability plate source target)
+          exp {:data [[1 3 5] [2 4 6] [2 11 12]]
+               :width 3
+               :height 3}]
+      (is (= act exp)))))
+
+(deftest duplicate_point_with_probability_test2
+  (testing "duplicate point with probability, 2"
+    (let [source {:x 0, :y 1}
+          target {:x 0, :y 2}
+          plate {:data [[1 3 5] [2 4 6] [10 11 12]]
+                 :width 3
+                 :height 3}
+          probability 0
+          act (duplicate_point_with_probability probability plate source target)
+          exp {:data [[1 3 5] [2 4 6] [10 11 12]]
+               :width 3
+               :height 3}]
+      (is (= act exp)))))
+
 
