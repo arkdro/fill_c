@@ -173,7 +173,7 @@
   (let [plate {:width width
                :height height
                :data data}
-        coords (for [x (range width) y (range height)] {:x x, :y y})
+        coords (for [y (range height) x (range width)] {:x x, :y y})
         new_plate (reduce
                   #(duplicate_adjacent_point probability %1 %2)
                   plate coords)
