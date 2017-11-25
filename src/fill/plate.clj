@@ -202,10 +202,10 @@
     color_range :color_range}
    {:keys [probability] :as opts}]
   (let [data (doall (vec (repeatedly height #(build_one_line width color_range))))
-        data_increased_domains (increase_domains width height data probability)
-        data2 (make_different_starts color_range width height data)
-        cur1 (get_color_in_data 0 0 data)
-        cur2 (get_color_in_data (dec width) (dec height) data)]
+        data_increased (increase_domains width height data probability)
+        data2 (make_different_starts color_range width height data_increased)
+        cur1 (get_color_in_data 0 0 data2)
+        cur2 (get_color_in_data (dec width) (dec height) data2)]
     {:width width
      :height height
      :color_range color_range
@@ -214,5 +214,5 @@
      :size2 1
      :cur1 cur1
      :cur2 cur2
-     :data data}))
+     :data data2}))
 
