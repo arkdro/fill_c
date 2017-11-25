@@ -7,6 +7,7 @@ do_one_dir(){
     generator_params="-d $dir -n $number_of_requests \
 		--min-width $min_width --max-width $max_width \
 		--min-height $min_height --max-height $max_height \
+		--probability $probability \
 		--min-color-range $min_color_range --max-color-range $max_color_range"
     checker_params="--remove --indir $dir"
     $generator $generator_params
@@ -24,6 +25,7 @@ min_height=4
 max_height=100
 min_color_range=4
 max_color_range=10
+probability=50
 
 start_dir="${1:-.}"
 base="${start_dir}/req"
