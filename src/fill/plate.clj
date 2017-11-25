@@ -57,7 +57,8 @@
         cur2 (get_color_in_data (dec width) (dec height) data)]
     (if (same_colors? cur1 cur2)
       (let [new_color (mod (inc cur1) color_range)] ; might give some edge to one side
-        (set_color_in_data 0 0 new_color data)))))
+        (set_color_in_data 0 0 new_color data))
+      data)))
 
 (defn beginning_of_line?
   "Check if the node is at the beginning of a line"
