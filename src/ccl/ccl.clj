@@ -50,6 +50,14 @@
         :default {:x (dec x)
                   :y (dec y)}))
 
+(defn get_upper_right_coord
+  "Get coordinates of a point on the upper-right"
+  [{:keys [x y]} width]
+  (cond (>= x (- width 1)) nil
+        (= y 0) nil
+        :default {:x (inc x)
+                  :y (dec y)}))
+
 (defn ccl
   "Do CCL"
   [width height color data]
