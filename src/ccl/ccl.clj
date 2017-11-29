@@ -91,8 +91,8 @@
    coord]
   (cond
     (background_point? color data coord) acc
-    (background_mask? color width data coord) (assign_new_label coord acc)
-    :default (assign_minimal_label coord acc)))
+    (background_mask? color width data coord) (assign_new_label acc coord)
+    :default (assign_minimal_label acc coord)))
 
 (defn pass1
   "Pass 1"
