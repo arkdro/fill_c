@@ -6,8 +6,8 @@
 (defn init_tables
   "Generate initial tables for intermediate data"
   [width height]
-  (let [repr_tab (for [y (range height) x (range width)] :no)
-        len (* width height)
+  (let [len (* width height)
+        repr_tab (for [i (range len)] :no)
         next_label (for [i (range len)] :no)
         tail (for [i (range len)] :no)]
     {:repr_tab repr_tab
