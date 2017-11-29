@@ -86,6 +86,22 @@
       (every? #(not= color %) mask_colors) true
       :default false)))
 
+(defn assign_new_label
+  "Assign a new label to a point"
+  [{:keys [result_labels repr_tab next_label tail m] :as acc}
+   {:keys [x y]}]
+  (let [new_result_labels (assoc-in result_labels [y x] m)
+        new_repr_tab (assoc repr_tab m m)
+        new_next_label (assoc next_label m :last)
+        new_tail (assoc tail m m)
+        new_m (inc m)]
+    (-> acc
+        (assoc :result_labels new_result_labels)
+        (assoc :repr_tab new_repr_tab)
+        (assoc :next_label new_next_label)
+        (assoc :tail new_tail)
+        (assoc :m new_m))))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
