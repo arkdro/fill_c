@@ -6,12 +6,14 @@
 (defn init_tables
   "Generate initial tables for intermediate data"
   [width height]
-  (let [len (* width height)
+  (let [result_labels (for [y (range height) x (range width)] :no)
+        len (* width height)
         repr_tab (for [i (range len)] :no)
         next_label (for [i (range len)] :no)
         tail (for [i (range len)] :no)]
     {:repr_tab repr_tab
      :next_label next_label
+     :result_labels result_labels
      :tail tail}))
 
 (defn get_color
