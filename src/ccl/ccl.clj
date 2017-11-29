@@ -42,6 +42,14 @@
       {:x x
        :y (dec y)}))
 
+(defn get_upper_left_coord
+  "Get coordinates of a point on the upper-left"
+  [{:keys [x y]}]
+  (cond (= x 0) nil
+        (= y 0) nil
+        :default {:x (dec x)
+                  :y (dec y)}))
+
 (defn ccl
   "Do CCL"
   [width height color data]
