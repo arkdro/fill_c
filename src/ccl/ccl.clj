@@ -14,6 +14,11 @@
      :next_label next_label
      :tail tail}))
 
+(defn get_color
+  "Get the color of a point in a data"
+  [{:keys [x y]} data]
+  (get-in [y x] data))
+
 (defn ccl
   "Do CCL"
   [width height color data]
