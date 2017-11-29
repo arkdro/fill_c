@@ -58,6 +58,17 @@
         :default {:x (inc x)
                   :y (dec y)}))
 
+(defn get_mask_coordinates
+  "Get coordinates of mask points for the specified coordinates.
+  It uses 8-connectivity."
+  [coord width]
+  (let [left (get_left_coord coord)
+        upper_left (get_upper_left_coord coord)
+        upper (get_upper_coord coord)
+        upper_right (get_upper_right_coord coord width)
+        coordinates [upper_left upper upper_right left]]
+    (map some? coordinates)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
