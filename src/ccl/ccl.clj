@@ -19,6 +19,12 @@
   [{:keys [x y]} data]
   (get-in [y x] data))
 
+(defn foreground_point?
+  "Check if a point at coordinates have foreground color"
+  [coord color data]
+  (let [data_color (get_color coord data)]
+    (= color data_color)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
