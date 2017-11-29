@@ -28,6 +28,13 @@
 (def background_point?
   (complement foreground_point?))
 
+(defn get_left_coord
+  "Get coordinates of a point on the left"
+  [{:keys [x y]}]
+  (if (= x 0) nil
+      {:x (dec x)
+       :y y}))
+
 (defn ccl
   "Do CCL"
   [width height color data]
