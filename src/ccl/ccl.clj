@@ -25,6 +25,9 @@
   (let [data_color (get_color coord data)]
     (= color data_color)))
 
+(def background_point?
+  (complement foreground_point?))
+
 (defn ccl
   "Do CCL"
   [width height color data]
