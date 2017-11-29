@@ -94,6 +94,17 @@
     (background_mask? color width data coord) (assign_new_label coord acc)
     :default (assign_minimal_label coord acc)))
 
+(defn pass1
+  "Pass 1"
+  [width height color data]
+  (let [tables (init_tables width height)
+        acc (-> tables
+                (assoc :m 1)
+                (assoc :width width)
+                (assoc :height height))
+        coordinates (for [y (range height) x (range width)] {:x x, :y y})]
+    (reduce #(pass1_step color data %1 %2) acc coordinates)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
