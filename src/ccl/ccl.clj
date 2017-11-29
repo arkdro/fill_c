@@ -35,6 +35,13 @@
       {:x (dec x)
        :y y}))
 
+(defn get_upper_coord
+  "Get coordinates of a point on the up"
+  [{:keys [x y]}]
+  (if (= y 0) nil
+      {:x x
+       :y (dec y)}))
+
 (defn ccl
   "Do CCL"
   [width height color data]
