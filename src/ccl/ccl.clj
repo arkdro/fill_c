@@ -69,6 +69,12 @@
         coordinates [upper_left upper upper_right left]]
     (map some? coordinates)))
 
+(defn get_mask_colors
+  "Get colors for the mask at the specified coordinates"
+  [coord width data]
+  (let [coordinates (get_mask_coordinates coord width)]
+    (map #(get_color data %) coordinates)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
