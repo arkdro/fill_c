@@ -84,6 +84,16 @@
       (every? #(not= color %) mask_colors) true
       :default false)))
 
+(defn pass1_step
+  "Do one step of the first pass"
+  [color data
+   {:keys [width] :as acc}
+   coord]
+  (cond
+    (background_point? color data coord) acc
+    (background_mask? color width data coord) (assign_new_label coord acc)
+    :default (assign_minimal_label coord acc)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
