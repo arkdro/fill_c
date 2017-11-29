@@ -75,6 +75,15 @@
   (let [coordinates (get_mask_coordinates coord width)]
     (map #(get_color data %) coordinates)))
 
+(defn background_mask?
+  "Check if a surrounding mask for a point at coordinates have background color"
+  [coord width color data]
+  (let [mask_colors (get_mask_colors coord width data)]
+    (cond
+      (= [] mask_colors) true
+      (every? #(not= color %) mask_colors) true
+      :default false)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
