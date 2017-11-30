@@ -113,6 +113,13 @@
   (let [coordinates (get_mask_coordinates coord width)]
     (map #(get_label result_labels %) coordinates)))
 
+(defn get_min_label
+  "Get minimal label for points of a mask"
+  [coord {:keys [width result_labels]}]
+  (let [labels (get_mask_labels coord width result_labels)]
+    ;; FIXME crash on empty seq. E.g. when coord = (0, 0)
+    (apply min labels)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
