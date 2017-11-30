@@ -102,6 +102,11 @@
         (assoc :tail new_tail)
         (assoc :m new_m))))
 
+(defn get_label
+  "Get the result label of a point with coordinates"
+  [result_labels {:keys [x y]}]
+  (get-in result_labels [y x]))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
