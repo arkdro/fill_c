@@ -107,6 +107,12 @@
   [result_labels {:keys [x y]}]
   (get-in result_labels [y x]))
 
+(defn get_mask_labels
+  "Get existing labels for points in mask"
+  [coord width result_labels]
+  (let [coordinates (get_mask_coordinates coord width)]
+    (map #(get_label result_labels %) coordinates)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
