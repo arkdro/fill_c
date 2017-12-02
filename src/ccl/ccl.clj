@@ -130,6 +130,11 @@
         mask_representative_label (get repr_tab mask_label)]
     (= cur_representative_label mask_representative_label)))
 
+(defn get_repr_label
+  "Get a representative label for a provisional label"
+  [label repr_tab]
+  (get repr_tab label))
+
 (defn merge_labels
   "Merge labels for the current point and a mask point"
   [cur_label mask_label acc]
