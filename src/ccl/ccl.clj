@@ -140,6 +140,10 @@
   [u v {:keys [repr_tab next_label] :as  acc}]
   )
 
+(defn update_next_label
+  "Connect the head of S(v) to the tail of S(u)"
+  [u v acc])
+
 (defn merge_representative_labels_aux
   [x_label y_label {:keys [repr_tab] :as acc}]
   (let [u (get_repr_label x_label repr_tab)
