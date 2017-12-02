@@ -144,6 +144,10 @@
   "Connect the head of S(v) to the tail of S(u)"
   [u v acc])
 
+(defn update_tail
+  "Set the tail of S(u) as the tail of S(v)"
+  [u v acc])
+
 (defn merge_representative_labels_aux
   [x_label y_label {:keys [repr_tab] :as acc}]
   (let [u (get_repr_label x_label repr_tab)
