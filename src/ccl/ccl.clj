@@ -165,6 +165,14 @@
     (representative_labels_equal? cur_label mask_label acc) acc
     :default (merge_representative_labels cur_label mask_label acc)))
 
+(defn merge_mask_labels
+  "Merge labels for the point and points in a mask"
+  [{:keys [width result_labels] :as acc}
+   coord]
+  (let [labels (get_mask_labels coord width result_labels)
+        cur_label (get_label result_labels coord)]
+    (reduce #(merge_labels cur_label %2 %1) acc labels)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
