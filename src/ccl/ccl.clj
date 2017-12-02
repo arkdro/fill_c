@@ -124,6 +124,12 @@
   [cur_label mask_label]
   (= cur_label mask_label))
 
+(defn representative_labels_equal?
+  [cur_label mask_label {:keys [repr_tab]}]
+  (let [cur_representative_label (get repr_tab cur_label)
+        mask_representative_label (get repr_tab mask_label)]
+    (= cur_representative_label mask_representative_label)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
