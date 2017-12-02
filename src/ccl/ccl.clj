@@ -173,6 +173,15 @@
         cur_label (get_label result_labels coord)]
     (reduce #(merge_labels cur_label %2 %1) acc labels)))
 
+(defn assign_minimal_label
+  "Assign the minimal label for a point using a mask"
+  [{:keys [result_labels] :as  acc}
+   {:keys [x y] :as coord}]
+  (let [min_label (get_min_label coord acc)
+        new_result_labels (assoc result_labels [y x] min_label)
+        new_acc (assoc acc :result_labels result_labels)]
+    (merge_mask_labels new_acc coord)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
