@@ -135,6 +135,28 @@
   [label repr_tab]
   (get repr_tab label))
 
+(defn merge_representative_labels_aux
+  [x_label y_label {:keys [repr_tab] :as acc}]
+  (let [u (get_repr_label x_label repr_tab)
+        v (get_repr_label y_label repr_tab)
+        new_repr_tab (update_repr_tab u v acc)
+        new_next_label (update_next_label u v acc)
+        new_tail (update_tail u v acc)]
+    (-> acc
+        (assoc :repr_tab new_repr_tab)
+        (assoc :next_label new_next_label)
+        (assoc :tail new_tail))))
+
+(defn merge_representative_labels
+  [cur_label mask_label {:keys [repr_tab] :as acc}]
+  (let [cur_repr_label (get_repr_label cur_label repr_tab)
+        mask_repr_label (get_repr_label mask_label repr_tab)]
+    (if (< cur_repr_label mask_repr_label) (merge_representative_labels_aux
+                                            cur_label
+                                            mask_label
+                                            acc)
+        (merge_representative_labels_aux mask_label cur_label acc))))
+
 (defn merge_labels
   "Merge labels for the current point and a mask point"
   [cur_label mask_label acc]
