@@ -135,6 +135,11 @@
   [label repr_tab]
   (get repr_tab label))
 
+(defn update_repr_tab
+  "Set u as the representative label for every label in S(v)"
+  [u v {:keys [repr_tab next_label] :as  acc}]
+  )
+
 (defn merge_representative_labels_aux
   [x_label y_label {:keys [repr_tab] :as acc}]
   (let [u (get_repr_label x_label repr_tab)
