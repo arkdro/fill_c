@@ -130,6 +130,14 @@
         mask_representative_label (get repr_tab mask_label)]
     (= cur_representative_label mask_representative_label)))
 
+(defn merge_labels
+  "Merge labels for the current point and a mask point"
+  [cur_label mask_label acc]
+  (cond
+    (provisional_labels_equal? cur_label mask_label) acc
+    (representative_labels_equal? cur_label mask_label acc) acc
+    :default (merge_representative_labels cur_label mask_label acc)))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
