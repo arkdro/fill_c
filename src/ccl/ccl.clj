@@ -120,6 +120,10 @@
     ;; FIXME crash on empty seq. E.g. when coord = (0, 0)
     (apply min labels)))
 
+(defn provisional_labels_equal?
+  [cur_label mask_label]
+  (= cur_label mask_label))
+
 (defn pass1_step
   "Do one step of the first pass"
   [color data
