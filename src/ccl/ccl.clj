@@ -140,6 +140,10 @@
   (let [next_idx (get next_label idx)]
     (= next_idx :last)))
 
+(defn update_repr_item
+  [u repr_idx acc]
+  (assoc-in acc [:repr_tab repr_idx] u))
+
 (defn update_repr_tab
   "Set u as the representative label for every label in S(v)"
   [u v {:keys [repr_tab next_label] :as  acc}]
