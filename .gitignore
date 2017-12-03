@@ -11,3 +11,5 @@ pom.xml.asc
 .hg/
 *~
 *.sw?
+req-[0-9]*.json
+req-[0-9]*.json-*
