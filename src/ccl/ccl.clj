@@ -3,10 +3,18 @@
   algorithm' by He, Chao, Suzuki."
   )
 
+(defn- init_1d_array
+  [width]
+  (vec (for [_ (range width)] :no)))
+
+(defn- init_2d_array
+  [width height]
+  (doall (vec (for [_ (range height)] (init_1d_array width)))))
+
 (defn init_tables
   "Generate initial tables for intermediate data"
   [width height]
-  (let [result_labels (for [y (range height) x (range width)] :no)
+  (let [result_labels (init_2d_array width height)
         len (* width height)
         repr_tab (vec (for [i (range len)] :no))
         next_label (vec (for [i (range len)] :no))
