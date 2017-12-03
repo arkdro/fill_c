@@ -161,7 +161,10 @@
 
 (defn update_tail
   "Set the tail of S(u) as the tail of S(v)"
-  [u v acc])
+  [u v {:keys [tail] :as acc}]
+  (let [v_tail (get tail v)
+        new_tail (assoc tail u v_tail)]
+    (assoc acc :tail new_tail)))
 
 (defn merge_representative_labels_aux
   [x_label y_label {:keys [repr_tab] :as acc}]
