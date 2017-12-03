@@ -154,7 +154,10 @@
 
 (defn update_next_label
   "Connect the head of S(v) to the tail of S(u)"
-  [u v acc])
+  [u v {:keys [next_label tail] :as acc}]
+  (let [cur_tail (get tail u)
+        new_next_label (assoc next_label cur_tail v)]
+    (assoc acc :next_label new_next_label)))
 
 (defn update_tail
   "Set the tail of S(u) as the tail of S(v)"
