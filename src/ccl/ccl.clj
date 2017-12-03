@@ -8,9 +8,9 @@
   [width height]
   (let [result_labels (for [y (range height) x (range width)] :no)
         len (* width height)
-        repr_tab (for [i (range len)] :no)
-        next_label (for [i (range len)] :no)
-        tail (for [i (range len)] :no)]
+        repr_tab (vec (for [i (range len)] :no))
+        next_label (vec (for [i (range len)] :no))
+        tail (vec (for [i (range len)] :no))]
     {:repr_tab repr_tab
      :next_label next_label
      :result_labels result_labels
