@@ -60,3 +60,24 @@
           exp nil]
       (is (= act exp)))))
 
+(deftest get_upper_left_coord_test1
+  (testing "get upper-left coordinates, 1"
+    (let [coord {:x 1, :y 2}
+          act (get_upper_left_coord coord)
+          exp {:x 0, :y 1}]
+      (is (= act exp)))))
+
+(deftest get_upper_left_coord_test2
+  (testing "get upper-left coordinates, 2"
+    (let [coord {:x 0, :y 2}
+          act (get_upper_left_coord coord)
+          exp nil]
+      (is (= act exp)))))
+
+(deftest get_upper_left_coord_test3
+  (testing "get upper-left coordinates, 3"
+    (let [coord {:x 1, :y 0}
+          act (get_upper_left_coord coord)
+          exp nil]
+      (is (= act exp)))))
+
