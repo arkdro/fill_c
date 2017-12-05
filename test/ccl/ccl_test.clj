@@ -81,3 +81,27 @@
           exp nil]
       (is (= act exp)))))
 
+(deftest get_upper_right_coord_test1
+  (testing "get upper-right coordinates, 1"
+    (let [coord {:x 1, :y 2}
+          width 4
+          act (get_upper_right_coord coord width)
+          exp {:x 2, :y 1}]
+      (is (= act exp)))))
+
+(deftest get_upper_right_coord_test2
+  (testing "get upper-right coordinates, 2"
+    (let [coord {:x 1, :y 0}
+          width 4
+          act (get_upper_right_coord coord width)
+          exp nil]
+      (is (= act exp)))))
+
+(deftest get_upper_right_coord_test3
+  (testing "get upper-right coordinates, 3"
+    (let [coord {:x 3, :y 2}
+          width 4
+          act (get_upper_right_coord coord width)
+          exp nil]
+      (is (= act exp)))))
+
