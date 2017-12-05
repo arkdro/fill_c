@@ -27,7 +27,7 @@
 (defn get_color
   "Get the color of a point in a data"
   [{:keys [x y]} data]
-  (get-in [y x] data))
+  (get-in data [y x]))
 
 (defn foreground_point?
   "Check if a point at coordinates have foreground color"
