@@ -15,3 +15,11 @@
                :tail [:no :no :no :no :no :no :no :no :no :no :no :no]}]
       (is (= act exp)))))
 
+(deftest get_color_test
+  (testing "get color"
+    (let [point {:x 1, :y 2}
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (get_color point data)
+          exp 7]
+      (is (= act exp)))))
+
