@@ -23,3 +23,12 @@
           exp 7]
       (is (= act exp)))))
 
+(deftest foreground_point_test
+  (testing "foreground point?"
+    (let [coord {:x 1, :y 2}
+          color 6
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (foreground_point? coord color data)
+          exp false]
+      (is (= act exp)))))
+
