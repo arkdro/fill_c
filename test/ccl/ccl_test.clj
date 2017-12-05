@@ -46,3 +46,17 @@
           exp nil]
       (is (= act exp)))))
 
+(deftest get_upper_coord_test1
+  (testing "get upper coordinates, 1"
+    (let [coord {:x 1, :y 2}
+          act (get_upper_coord coord)
+          exp {:x 1, :y 1}]
+      (is (= act exp)))))
+
+(deftest get_upper_coord_test2
+  (testing "get upper coordinates, 2"
+    (let [coord {:x 1, :y 0}
+          act (get_upper_coord coord)
+          exp nil]
+      (is (= act exp)))))
+
