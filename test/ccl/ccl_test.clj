@@ -32,3 +32,17 @@
           exp false]
       (is (= act exp)))))
 
+(deftest get_left_coord_test1
+  (testing "get left coordinates, 1"
+    (let [coord {:x 1, :y 2}
+          act (get_left_coord coord)
+          exp {:x 0, :y 2}]
+      (is (= act exp)))))
+
+(deftest get_left_coord_test2
+  (testing "get left coordinates, 2"
+    (let [coord {:x 0, :y 2}
+          act (get_left_coord coord)
+          exp nil]
+      (is (= act exp)))))
+
