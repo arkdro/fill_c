@@ -86,7 +86,7 @@
     (map #(get_color % data) coordinates)))
 
 (defn background_mask?
-  "Check if a surrounding mask for a point at coordinates have background color"
+  "Check if the whole mask for a point has a background color"
   [coord width color data]
   (let [mask_colors (get_mask_colors coord width data)]
     (cond
