@@ -266,3 +266,19 @@
           exp false]
       (is (= act exp)))))
 
+(deftest last_label_test1
+  (testing "last_label?, 1"
+    (let [idx 2
+          next_label [:no :no :last :no]
+          act (last_label? idx next_label)
+          exp true]
+      (is (= act exp)))))
+
+(deftest last_label_test2
+  (testing "last_label?, 2"
+    (let [idx 3
+          next_label [:no :no :last :no]
+          act (last_label? idx next_label)
+          exp false]
+      (is (= act exp)))))
+
