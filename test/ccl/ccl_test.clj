@@ -282,3 +282,12 @@
           exp false]
       (is (= act exp)))))
 
+(deftest update_repr_item_test
+  (testing "update_repr_item"
+    (let [u 3
+          idx 2
+          acc {:repr_tab [:no :no :no 2 1 :no]}
+          act (update_repr_item u idx acc)
+          exp {:repr_tab [:no :no 3 2 1 :no]}]
+      (is (= act exp)))))
+
