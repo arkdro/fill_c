@@ -77,7 +77,7 @@
         upper (get_upper_coord coord)
         upper_right (get_upper_right_coord coord width)
         coordinates [upper_left upper upper_right left]]
-    (map some? coordinates)))
+    (filter some? coordinates)))
 
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
