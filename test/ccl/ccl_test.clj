@@ -145,3 +145,12 @@
           exp [{:x 2, :y 0} {:x 3, :y 0} {:x 2, :y 1}]]
       (is (= act exp)))))
 
+(deftest get_mask_color_test
+  (testing "get mask color"
+    (let [coord {:x 3, :y 1}
+          width 4
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (get_mask_colors coord width data)
+          exp [2 1 5]]
+      (is (= act exp)))))
+
