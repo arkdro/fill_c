@@ -112,14 +112,14 @@
 
 (defn get_label
   "Get the result label of a point with coordinates"
-  [result_labels {:keys [x y]}]
+  [{:keys [x y]} result_labels]
   (get-in result_labels [y x]))
 
 (defn get_mask_labels
   "Get existing labels for points in mask"
   [coord width result_labels]
   (let [coordinates (get_mask_coordinates coord width)]
-    (map #(get_label result_labels %) coordinates)))
+    (map #(get_label % result_labels) coordinates)))
 
 (defn get_min_label
   "Get minimal label for points of a mask"
@@ -209,7 +209,7 @@
   [{:keys [width result_labels] :as acc}
    coord]
   (let [labels (get_mask_labels coord width result_labels)
-        cur_label (get_label result_labels coord)]
+        cur_label (get_label coord result_labels)]
     (reduce #(merge_labels cur_label %2 %1) acc labels)))
 
 (defn assign_minimal_label
