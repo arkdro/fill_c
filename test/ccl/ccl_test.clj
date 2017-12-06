@@ -174,3 +174,23 @@
           exp true]
       (is (= act exp)))))
 
+(deftest assign_new_label_test
+  (testing "assign_new_label"
+    (let [coord {:x 2, :y 1}
+          acc {:repr_tab [:no :no :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no :no :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no]
+                               [:no :no :no :no]
+                               [:no :no :no :no]]
+               :tail [:no :no :no :no :no :no :no :no :no :no :no :no]
+               :m 1}
+          act (assign_new_label acc coord)
+          exp {:repr_tab [:no 1 :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no :last :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no]
+                               [:no :no   1 :no]
+                               [:no :no :no :no]]
+               :tail [:no 1 :no :no :no :no :no :no :no :no :no :no]
+               :m 2}]
+      (is (= act exp)))))
+
