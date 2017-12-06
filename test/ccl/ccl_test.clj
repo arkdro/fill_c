@@ -291,3 +291,14 @@
           exp {:repr_tab [:no :no 3 2 1 :no]}]
       (is (= act exp)))))
 
+(deftest update_repr_tab_test
+  (testing "update_repr_tab"
+    (let [u 4
+          idx 1
+          acc {:repr_tab [:no :no :no 2 1 :no :no :no]
+               :next_label [:no 3 :no 7 :last :no :no 4]}
+          act (update_repr_tab u idx acc)
+          exp {:repr_tab [:no 4 :no 4 4 :no :no 4]
+               :next_label [:no 3 :no 7 :last :no :no 4]}]
+      (is (= act exp)))))
+
