@@ -202,3 +202,30 @@
           exp 5]
       (is (= act exp)))))
 
+(deftest get_mask_labels_test1
+  (testing "get_mask_labels, 1"
+    (let [coord {:x 0, :y 0}
+          width 4
+          result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
+          act (get_mask_labels coord width result_labels)
+          exp []]
+      (is (= act exp)))))
+
+(deftest get_mask_labels_test2
+  (testing "get_mask_labels, 2"
+    (let [coord {:x 0, :y 1}
+          width 4
+          result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
+          act (get_mask_labels coord width result_labels)
+          exp [2]]
+      (is (= act exp)))))
+
+(deftest get_mask_labels_test3
+  (testing "get_mask_labels, 3"
+    (let [coord {:x 2, :y 1}
+          width 4
+          result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
+          act (get_mask_labels coord width result_labels)
+          exp [2 1 2]]
+      (is (= act exp)))))
+
