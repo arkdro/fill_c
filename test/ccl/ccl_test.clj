@@ -194,3 +194,11 @@
                :m 2}]
       (is (= act exp)))))
 
+(deftest get_label_test
+  (testing "get_label"
+    (let [coord {:x 2, :y 1}
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (get_label coord data)
+          exp 5]
+      (is (= act exp)))))
+
