@@ -154,3 +154,23 @@
           exp [2 1 5]]
       (is (= act exp)))))
 
+(deftest background_mask_test1
+  (testing "background_mask?, 1"
+    (let [coord {:x 2, :y 1}
+          width 4
+          color 2
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (background_mask? coord width color data)
+          exp false]
+      (is (= act exp)))))
+
+(deftest background_mask_test2
+  (testing "background_mask?, 2"
+    (let [coord {:x 2, :y 1}
+          width 4
+          color 3
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (background_mask? coord width color data)
+          exp true]
+      (is (= act exp)))))
+
