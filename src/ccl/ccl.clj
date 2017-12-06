@@ -118,8 +118,9 @@
 (defn get_mask_labels
   "Get existing labels for points in mask"
   [coord width result_labels]
-  (let [coordinates (get_mask_coordinates coord width)]
-    (map #(get_label % result_labels) coordinates)))
+  (let [coordinates (get_mask_coordinates coord width)
+        labels (map #(get_label % result_labels) coordinates)]
+    (filter integer? labels)))
 
 (defn get_min_label
   "Get minimal label for points of a mask"
