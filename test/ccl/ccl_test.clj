@@ -302,3 +302,14 @@
                :next_label [:no 3 :no 7 :last :no :no 4]}]
       (is (= act exp)))))
 
+(deftest update_next_label_test
+  (testing "update_next_label"
+    (let [u 1
+          v 2
+          acc {:tail [:no 7 4 2 1 :no :no :no]
+               :next_label [:no 3 6 7 :last :no 4 :last]}
+          act (update_next_label u v acc)
+          exp {:tail [:no 7 4 2 1 :no :no :no]
+               :next_label [:no 3 6 7 :last :no 4 2]}]
+      (is (= act exp)))))
+
