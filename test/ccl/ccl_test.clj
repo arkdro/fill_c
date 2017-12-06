@@ -248,3 +248,21 @@
           exp false]
       (is (= act exp)))))
 
+(deftest representative_labels_equal_test1
+  (testing "representative_labels_equal?, 1"
+    (let [cur 3
+          mask 4
+          acc {:repr_tab [:no :no :no 2 2 :no :no :no :no :no :no :no]}
+          act (representative_labels_equal? cur mask acc)
+          exp true]
+      (is (= act exp)))))
+
+(deftest representative_labels_equal_test2
+  (testing "representative_labels_equal?, 2"
+    (let [cur 3
+          mask 4
+          acc {:repr_tab [:no :no :no 2 1 :no :no :no :no :no :no :no]}
+          act (representative_labels_equal? cur mask acc)
+          exp false]
+      (is (= act exp)))))
+
