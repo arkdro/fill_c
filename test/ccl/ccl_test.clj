@@ -240,3 +240,11 @@
           exp 1]
       (is (= act exp)))))
 
+(deftest provisional_labels_equal_test
+  (testing "provisional_labels_equal?"
+    (let [cur 3
+          mask 4
+          act (provisional_labels_equal? cur mask)
+          exp false]
+      (is (= act exp)))))
+
