@@ -229,3 +229,14 @@
           exp [2 1 2]]
       (is (= act exp)))))
 
+(deftest get_min_label_test
+  (testing "get_min_label"
+    (let [coord {:x 2, :y 1}
+          width 4
+          result_labels [[:no 2 :no 1] [:no 3 :no :no] [:no :no :no :no]]
+          acc {:width width
+               :result_labels result_labels}
+          act (get_min_label coord acc)
+          exp 1]
+      (is (= act exp)))))
+
