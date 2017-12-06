@@ -126,7 +126,7 @@
   "Get minimal label for points of a mask"
   [coord {:keys [width result_labels]}]
   (let [labels (get_mask_labels coord width result_labels)]
-    ;; FIXME crash on empty seq. E.g. when coord = (0, 0)
+    ;; FIXME crash on empty seq. E.g. when coord = (0, 0). Should not happen.
     (apply min labels)))
 
 (defn provisional_labels_equal?
