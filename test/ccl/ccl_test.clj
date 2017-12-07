@@ -571,3 +571,21 @@
                [:no :no   3 :no   1 :no :no   4   4]]]
       (is (= act exp)))))
 
+(deftest ccl_test
+  (testing "ccl"
+    (let [width 9
+          height 5
+          color 1
+          data [[0 0 0 0 0 0 0 0 1]
+                [0 0 1 0 1 0 0 0 1]
+                [0 0 1 0 1 0 1 1 1]
+                [1 0 0 1 0 1 0 0 0]
+                [0 1 0 0 1 0 0 1 1]]
+          act (ccl width height color data)
+          exp [[:no :no :no :no :no :no :no :no   1]
+               [:no :no   1 :no   1 :no :no :no   1]
+               [:no :no   1 :no   1 :no   1   1   1]
+               [  5 :no :no   1 :no   1 :no :no :no]
+               [:no   5 :no :no   1 :no :no   6   6]]]
+      (is (= act exp)))))
+
