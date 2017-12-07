@@ -150,8 +150,8 @@
     (= next_idx :last)))
 
 (defn update_repr_item
-  [u repr_idx acc]
-  (assoc-in acc [:repr_tab repr_idx] u))
+  [u repr_idx repr_tab]
+  (assoc repr_tab repr_idx u))
 
 (defn update_repr_tab
   "Set u as the representative label for every label in S(v)"
