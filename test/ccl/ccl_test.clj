@@ -333,3 +333,21 @@
                :tail [:no 4 4 :no :no :no :no :no :no :no :no :no]}]
       (is (= act exp)))))
 
+(deftest merge_labels_test1
+  (testing "merge_labels, 1"
+    (let [cur_label 3
+          mask_label 3
+          acc {}
+          act (merge_labels cur_label mask_label acc)
+          exp {}]
+      (is (= act exp)))))
+
+(deftest merge_labels_test2
+  (testing "merge_labels, 2"
+    (let [cur_label 7
+          mask_label 3
+          acc {:repr_tab [:no 1 2 1 2 :no 2 1 :no :no :no :no]}
+          act (merge_labels cur_label mask_label acc)
+          exp {:repr_tab [:no 1 2 1 2 :no 2 1 :no :no :no :no]}]
+      (is (= act exp)))))
+
