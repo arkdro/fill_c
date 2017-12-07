@@ -351,3 +351,25 @@
           exp {:repr_tab [:no 1 2 1 2 :no 2 1 :no :no :no :no]}]
       (is (= act exp)))))
 
+(deftest merge_mask_labels_test
+  (testing "merge_mask_labels"
+    (let [coord {:x 5, :y 3}
+          acc {:width 9
+               :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
+               :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
+               :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}
+          act (merge_mask_labels acc coord)
+          exp {:width 9
+               :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
+               :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
+               :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}]
+      (is (= act exp)))))
+
