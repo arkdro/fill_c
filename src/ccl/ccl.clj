@@ -174,12 +174,12 @@
     (assoc tail u v_tail)))
 
 (defn merge_representative_labels_aux
-  [x_label y_label {:keys [repr_tab] :as acc}]
+  [x_label y_label {:keys [next_label repr_tab tail] :as acc}]
   (let [u (get_repr_label x_label repr_tab)
         v (get_repr_label y_label repr_tab)
-        new_repr_tab (update_repr_tab u v acc)
-        new_next_label (update_next_label u v acc)
-        new_tail (update_tail u v acc)]
+        new_repr_tab (update_repr_tab u v repr_tab next_label)
+        new_next_label (update_next_label u v next_label tail)
+        new_tail (update_tail u v tail)]
     (-> acc
         (assoc :repr_tab new_repr_tab)
         (assoc :next_label new_next_label)
