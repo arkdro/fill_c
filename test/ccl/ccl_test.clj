@@ -535,3 +535,39 @@
                [0 0 0 0 0 0 0 0 0]]]
       (is (= act exp)))))
 
+(deftest pass2_test1
+  (testing "pass2, 1"
+    (let [width 9
+          height 4
+          filled_tabs {
+                       :repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+                       :result_labels [[:no :no :no :no :no :no :no :no   1]
+                                       [:no :no   2 :no   3 :no :no :no   1]
+                                       [:no :no   2 :no   3 :no   4   1   1]
+                                       [  5   2 :no   2 :no   3 :no :no :no]]}
+          act (pass2 width height filled_tabs)
+          exp [[:no :no :no :no :no :no :no :no   1]
+               [:no :no   1 :no   1 :no :no :no   1]
+               [:no :no   1 :no   1 :no   1   1   1]
+               [  1   1 :no   1 :no   1 :no :no :no]]]
+      (is (= act exp)))))
+
+(deftest pass2_test2
+  (testing "pass2, 2"
+    (let [width 9
+          height 5
+          filled_tabs {
+                       :repr_tab [:no 1 1 1 1 2 3 4 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+                       :result_labels [[:no :no :no :no :no :no :no :no   1]
+                                       [:no :no   2 :no   3 :no :no :no   1]
+                                       [:no :no   2 :no   3 :no   4   1   1]
+                                       [  5 :no :no   2 :no   3 :no :no :no]
+                                       [:no :no   6 :no   2 :no :no   7   7]]}
+          act (pass2 width height filled_tabs)
+          exp [[:no :no :no :no :no :no :no :no   1]
+               [:no :no   1 :no   1 :no :no :no   1]
+               [:no :no   1 :no   1 :no   1   1   1]
+               [  2 :no :no   1 :no   1 :no :no :no]
+               [:no :no   3 :no   1 :no :no   4   4]]]
+      (is (= act exp)))))
+
