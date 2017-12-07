@@ -493,3 +493,45 @@
                                [  5   2 :no   2 :no   3 :no :no :no]]}]
       (is (= act exp)))))
 
+(deftest fill_result_point_test1
+  (testing "fill_result_point, 1"
+    (let [result_data [[0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]]
+          coord {:x 4, :y 2}
+          acc {:repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :tail [:no 3 3 3 4 5 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}
+          act (fill_result_point coord acc result_data)
+          exp [[0 0 0 0 0 0 0 0 0]
+               [0 0 0 0 0 0 0 0 0]
+               [0 0 0 0 1 0 0 0 0]
+               [0 0 0 0 0 0 0 0 0]]]
+      (is (= act exp)))))
+
+(deftest fill_result_point_test2
+  (testing "fill_result_point, 2"
+    (let [result_data [[0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]
+                       [0 0 0 0 0 0 0 0 0]]
+          coord {:x 3, :y 2}
+          acc {:repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :tail [:no 3 3 3 4 5 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}
+          act (fill_result_point coord acc result_data)
+          exp [[0 0 0 0 0 0 0 0 0]
+               [0 0 0 0 0 0 0 0 0]
+               [0 0 0 :no 0 0 0 0 0]
+               [0 0 0 0 0 0 0 0 0]]]
+      (is (= act exp)))))
+
