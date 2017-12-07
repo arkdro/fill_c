@@ -208,8 +208,8 @@
   [{:keys [width result_labels] :as acc}
    coord]
   (let [labels (get_mask_labels coord width result_labels)
-        cur_label (get_label coord result_labels)]
-    (reduce #(merge_labels cur_label %2 %1) acc labels)))
+        coord_label (get_label coord result_labels)]
+    (reduce #(merge_labels coord_label %2 %1) acc labels)))
 
 (defn assign_minimal_label
   "Assign the minimal label for a point using a mask"
