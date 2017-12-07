@@ -155,11 +155,11 @@
 
 (defn update_repr_tab
   "Set u as the representative label for every label in S(v)"
-  [u repr_idx {:keys [next_label] :as acc}]
-  (if (last_label? repr_idx next_label) (update_repr_item u repr_idx acc)
-      (let [new_acc (update_repr_item u repr_idx acc)
+  [u repr_idx repr_tab next_label]
+  (if (last_label? repr_idx next_label) (update_repr_item u repr_idx repr_tab)
+      (let [new_repr_tab (update_repr_item u repr_idx repr_tab)
             new_repr_idx (get next_label repr_idx)]
-        (recur u new_repr_idx new_acc))))
+        (recur u new_repr_idx new_repr_tab next_label))))
 
 (defn update_next_label
   "Connect the head of S(v) to the tail of S(u)"
