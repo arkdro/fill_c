@@ -305,11 +305,10 @@
   (testing "update_next_label"
     (let [u 1
           v 2
-          acc {:tail [:no 7 4 2 1 :no :no :no]
-               :next_label [:no 3 6 7 :last :no 4 :last]}
-          act (update_next_label u v acc)
-          exp {:tail [:no 7 4 2 1 :no :no :no]
-               :next_label [:no 3 6 7 :last :no 4 2]}]
+          tail [:no 7 4 2 1 :no :no :no]
+          next_label [:no 3 6 7 :last :no 4 :last]
+          act (update_next_label u v next_label tail)
+          exp [:no 3 6 7 :last :no 4 2]]
       (is (= act exp)))))
 
 (deftest update_tail_test
