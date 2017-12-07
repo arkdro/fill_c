@@ -216,8 +216,8 @@
   [{:keys [result_labels] :as  acc}
    {:keys [x y] :as coord}]
   (let [min_label (get_min_label coord acc)
-        new_result_labels (assoc result_labels [y x] min_label)
-        new_acc (assoc acc :result_labels result_labels)]
+        new_result_labels (assoc-in result_labels [y x] min_label)
+        new_acc (assoc acc :result_labels new_result_labels)]
     (merge_mask_labels new_acc coord)))
 
 (defn pass1_step
