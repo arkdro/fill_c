@@ -286,9 +286,9 @@
   (testing "update_repr_item"
     (let [u 3
           idx 2
-          acc {:repr_tab [:no :no :no 2 1 :no]}
-          act (update_repr_item u idx acc)
-          exp {:repr_tab [:no :no 3 2 1 :no]}]
+          repr_tab [:no :no :no 2 1 :no]
+          act (update_repr_item u idx repr_tab)
+          exp [:no :no 3 2 1 :no]]
       (is (= act exp)))))
 
 (deftest update_repr_tab_test
