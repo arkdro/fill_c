@@ -32,6 +32,15 @@
           exp false]
       (is (= act exp)))))
 
+(deftest background_point_test
+  (testing "background point?"
+    (let [coord {:x 1, :y 2}
+          color 6
+          data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
+          act (background_point? coord color data)
+          exp true]
+      (is (= act exp)))))
+
 (deftest get_left_coord_test1
   (testing "get left coordinates, 1"
     (let [coord {:x 1, :y 2}
