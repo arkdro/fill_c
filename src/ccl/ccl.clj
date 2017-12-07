@@ -250,6 +250,13 @@
         repr_label (get_repr_label label repr_tab)]
     (assoc-in result_data [y x] repr_label)))
 
+(defn pass2
+  "Pass 2"
+  [width height filled_tabs]
+  (let [result_data (init_2d_array width height)
+        coordinates (for [y (range height) x (range width)] {:x x, :y y})]
+    (reduce #(fill_result_point %2 filled_tabs %1) result_data coordinates)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
