@@ -246,9 +246,10 @@
   [{:keys [x y] :as coord}
    {:keys [repr_tab result_labels]}
    result_data]
-  (let [label (get_label coord result_labels)
-        repr_label (get_repr_label label repr_tab)]
-    (assoc-in result_data [y x] repr_label)))
+  (let [label (get_label coord result_labels)]
+    (if-let [repr_label (get_repr_label label repr_tab)]
+      (assoc-in result_data [y x] repr_label)
+      (assoc-in result_data [y x] :no))))
 
 (defn pass2
   "Pass 2"
