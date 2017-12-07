@@ -471,3 +471,25 @@
                                [  5   2 :no   2 :no   3 :no :no :no]]}]
       (is (= act exp)))))
 
+(deftest pass1_test
+  (testing "pass1"
+    (let [width 9
+          height 4
+          color 1
+          data [[0 0 0 0 0 0 0 0 1]
+                [0 0 1 0 1 0 0 0 1]
+                [0 0 1 0 1 0 1 1 1]
+                [1 1 0 1 0 1 0 0 0]]
+          act (pass1 width height color data)
+          exp {:m 6
+               :width 9
+               :height 4
+               :repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :tail [:no 3 3 3 4 5 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}]
+      (is (= act exp)))))
+
