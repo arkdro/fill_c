@@ -322,3 +322,16 @@
           exp {:tail [:no 4 4 2 1 :no :no :no]}]
       (is (= act exp)))))
 
+(deftest merge_representative_labels_test
+  (testing "merge_representative_labels"
+    (let [cur_label 6
+          mask_label 3
+          acc {:repr_tab [:no 1 2 1 2 :no 2 1 :no :no :no :no]
+               :next_label [:no 3 6 7 :last :no 4 :last :no :no :no :no]
+               :tail [:no 7 4 :no :no :no :no :no :no :no :no :no]}
+          act (merge_representative_labels cur_label mask_label acc)
+          exp {:repr_tab [:no 1 1 1 1 :no 1 1 :no :no :no :no]
+               :next_label [:no 3 6 7 :last :no 4 2 :no :no :no :no]
+               :tail [:no 4 4 :no :no :no :no :no :no :no :no :no]}]
+      (is (= act exp)))))
+
