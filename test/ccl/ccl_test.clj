@@ -315,9 +315,9 @@
   (testing "update_tail"
     (let [u 1
           v 2
-          acc {:tail [:no 7 4 2 1 :no :no :no]}
-          act (update_tail u v acc)
-          exp {:tail [:no 4 4 2 1 :no :no :no]}]
+          tail [:no 7 4 2 1 :no :no :no]
+          act (update_tail u v tail)
+          exp [:no 4 4 2 1 :no :no :no]]
       (is (= act exp)))))
 
 (deftest merge_representative_labels_test
