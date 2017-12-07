@@ -404,3 +404,70 @@
                                [  5   2 :no   2 :no   3 :no :no :no]]}]
       (is (= act exp)))))
 
+(deftest pass1_step_test1
+  (testing "pass1_step, 1"
+    (let [color 5
+          data [[0 1 2]
+                [2 3 3]
+                [0 0 1]]
+          coord {:x 2, :y 1}
+          acc {}
+          act (pass1_step color data acc coord)
+          exp {}]
+      (is (= act exp)))))
+
+(deftest pass1_step_test2
+  (testing "pass1_step, 2"
+    (let [color 4
+          data [[0 1 2 0]
+                [2 3 4 1]
+                [0 0 1 2]]
+          coord {:x 2, :y 1}
+          acc {:m 1
+               :width 4
+               :repr_tab [:no :no :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no :no :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no]
+                               [:no :no :no :no]
+                               [:no :no :no :no]]
+               :tail [:no :no :no :no :no :no :no :no :no :no :no :no]}
+          act (pass1_step color data acc coord)
+          exp {:m 2
+               :width 4
+               :repr_tab [:no 1 :no :no :no :no :no :no :no :no :no :no]
+               :next_label [:no :last :no :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no]
+                               [:no :no 1 :no]
+                               [:no :no :no :no]]
+               :tail [:no 1 :no :no :no :no :no :no :no :no :no :no]}]
+      (is (= act exp)))))
+
+(deftest pass1_step_test3
+  (testing "pass1_step, 3"
+    (let [color 1
+          data [[0 0 0 0 0 0 0 0 1]
+                [0 0 1 0 1 0 0 0 1]
+                [0 0 1 0 1 0 1 1 1]
+                [1 1 0 1 0 1 0 0 0]]
+          coord {:x 5, :y 3}
+          acc {:m 5
+               :width 9
+               :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
+               :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
+               :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no :no :no :no :no]]}
+          act (pass1_step color data acc coord)
+          exp {:m 5
+               :width 9
+               :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
+               :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
+               :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
+               :result_labels [[:no :no :no :no :no :no :no :no   1]
+                               [:no :no   2 :no   3 :no :no :no   1]
+                               [:no :no   2 :no   3 :no   4   1   1]
+                               [  5   2 :no   2 :no   3 :no :no :no]]}]
+      (is (= act exp)))))
+
