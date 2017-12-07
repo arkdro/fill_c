@@ -241,6 +241,15 @@
         coordinates (for [y (range height) x (range width)] {:x x, :y y})]
     (reduce #(pass1_step color data %1 %2) acc coordinates)))
 
+(defn fill_result_point
+  "Fill one point of result data using provisional and representative labels"
+  [{:keys [x y] :as coord}
+   {:keys [repr_tab result_labels]}
+   result_data]
+  (let [label (get_label coord result_labels)
+        repr_label (get_repr_label label repr_tab)]
+    (assoc-in result_data [y x] repr_label)))
+
 (defn ccl
   "Do CCL"
   [width height color data]
