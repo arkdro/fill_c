@@ -260,6 +260,6 @@
 (defn ccl
   "Do CCL"
   [width height color data]
-  
-  )
+  (let [filled_tabs (pass1 width height color data)]
+        (pass2 width height filled_tabs)))
 
