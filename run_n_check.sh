@@ -8,6 +8,7 @@ do_one_dir(){
 		--min-width $min_width --max-width $max_width \
 		--min-height $min_height --max-height $max_height \
 		--probability $probability \
+        -t fill \
 		--min-color-range $min_color_range --max-color-range $max_color_range"
     checker_params="--remove --indir $dir"
     $generator $generator_params
