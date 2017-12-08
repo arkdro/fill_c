@@ -74,8 +74,10 @@
   [& args]
   (let [opts (parse-opts args cli-options)
         options (get opts :options)
+        errors (get opts :errors)
         help (get-in opts [:options :help])]
-    (if help
-      (println (get opts :summary))
-      (fill.generator/generate-requests options))))
+    (cond
+      help (println (get opts :summary))
+      errors (println errors)
+      :default (fill.generator/generate-requests options))))
 
