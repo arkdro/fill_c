@@ -13,6 +13,7 @@ an expected 2d array of number.
 
 ## Options
 
+* -t | --type <fill | ccl> - which request to generate, fill or ccl
 * -d | --dir <directory> - where to store generated request files
 * -n | --num-request N - number of requests to generate
 * --min-width N - minimal width of the 2d data array
@@ -22,6 +23,7 @@ an expected 2d array of number.
 * --min-color-range N - minimal color range to use for data points
 * --max-color-range N - maximal color range to use for data points
 * --probability N - probability of duplicating adjacent points, 0...100
+* --ccl-output-background STR - string to use as default in ccl for points without labels
 * --pretty - pretty print requests
 
 ## Examples
