@@ -14,6 +14,10 @@
   ;; An option with a required argument
   [["-t" "--type T" "type of request: fill or ccl"
     :validate [#(or (= "fill" %) (= "ccl" %)) "Must be fill or ccl"]]
+   [nil "--ccl-output-background STRING"
+    "Default string for background in ccl output"
+    :parse-fn #(read-string %)
+    :default "."]
    [nil "--min-width N" "minimal width"
     :default 4
     :parse-fn #(Integer/parseInt %)
