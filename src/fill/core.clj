@@ -12,7 +12,9 @@
 
 (def cli-options
   ;; An option with a required argument
-  [[nil "--min-width N" "minimal width"
+  [["-t" "--type T" "type of request: fill or ccl"
+    :validate [#(or (= "fill" %) (= "ccl" %)) "Must be fill or ccl"]]
+   [nil "--min-width N" "minimal width"
     :default 4
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
@@ -74,10 +76,12 @@
   [& args]
   (let [opts (parse-opts args cli-options)
         options (get opts :options)
+        type (get options :type)
         errors (get opts :errors)
         help (get-in opts [:options :help])]
     (cond
       help (println (get opts :summary))
       errors (println errors)
+      (= type "fill") (fill.generator/generate-requests options)
       :default (fill.generator/generate-requests options))))
 
