@@ -2,7 +2,8 @@
   (:require [clojure.tools.cli :refer [parse-opts]])
   (:require [fill.by_points]
             [fill.generator]
-            [fill.plate])
+            [fill.plate]
+            [ccl.generator])
   (:gen-class))
 
 (defn get_random_color
