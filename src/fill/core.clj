@@ -83,5 +83,6 @@
       help (println (get opts :summary))
       errors (println errors)
       (= type "fill") (fill.generator/generate-requests options)
-      :default (fill.generator/generate-requests options))))
+      (= type "ccl") (ccl.generator/generate-requests options)
+      :default (println (get opts :summary)))))
 
