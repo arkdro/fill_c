@@ -90,6 +90,17 @@
         coordinates [upper upper_right left]]
     (filter some? coordinates)))
 
+(defn get_mask_coordinates_6_odd
+  "Get coordinates of mask points for the specified coordinates,
+  when the y-coordinate is odd.
+  It uses 6-connectivity."
+  [coord width]
+  (let [left (get_left_coord coord)
+        upper_left (get_upper_left_coord coord)
+        upper (get_upper_coord coord)
+        coordinates [upper_left upper left]]
+    (filter some? coordinates)))
+
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
   [coord width data]
