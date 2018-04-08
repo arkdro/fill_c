@@ -101,6 +101,13 @@
         coordinates [upper_left upper left]]
     (filter some? coordinates)))
 
+(defn get_mask_coordinates_6
+  [{:keys [y] :as coord}
+   width]
+  (if (even? y)
+    (get_mask_coordinates_6_even coord width)
+    (get_mask_coordinates_6_odd coord width)))
+
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
   [coord width data]
