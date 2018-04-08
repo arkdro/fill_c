@@ -108,6 +108,13 @@
     (get_mask_coordinates_6_even coord width)
     (get_mask_coordinates_6_odd coord width)))
 
+(defn get_mask_coordinates
+  [coord width connectivity]
+  (case connectivity
+    4 (ex-info "Connectivity 4 is not implemented" {})
+    6 (get_mask_coordinates_6 coord width)
+    8 (get_mask_coordinates_8 coord width)))
+
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
   [coord width data]
