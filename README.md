@@ -1,9 +1,9 @@
-# fill
+# fill & ccl
 
-Flood fill, four-way.
-https://en.wikipedia.org/wiki/Flood_fill
+* Flood fill, four-way. https://en.wikipedia.org/wiki/Flood_fill
+* Connected component labeling, 8-connectivity
 
-The program generates requests for flood fill. The request contains
+The program generates requests for flood fill or CCL. The request contains
 width, height, color range, 2d array of numbers, steps to run on the array and
 an expected 2d array of number.
 
