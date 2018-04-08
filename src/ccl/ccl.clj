@@ -117,14 +117,14 @@
 
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
-  [coord width data]
-  (let [coordinates (get_mask_coordinates_8 coord width)]
+  [coord width connectivity data]
+  (let [coordinates (get_mask_coordinates coord width connectivity)]
     (map #(get_color % data) coordinates)))
 
 (defn background_mask?
   "Check if the whole mask for a point has a background color"
-  [coord width color data]
-  (let [mask_colors (get_mask_colors coord width data)]
+  [coord width color connectivity data]
+  (let [mask_colors (get_mask_colors coord width connectivity data)]
     (cond
       (= [] mask_colors) true
       (every? #(not= color %) mask_colors) true
@@ -259,19 +259,21 @@
 (defn pass1_step
   "Do one step of the first pass"
   [color data
-   {:keys [width] :as acc}
+   {:keys [width connectivity] :as acc}
    coord]
   (cond
     (background_point? coord color data) acc
-    (background_mask? coord width color data) (assign_new_label acc coord)
+    (background_mask? coord width color connectivity data) (assign_new_label
+                                                            acc coord)
     :default (assign_minimal_label acc coord)))
 
 (defn pass1
   "Pass 1"
-  [width height color data]
+  [width height color connectivity data]
   (let [tables (init_tables width height)
         acc (-> tables
                 (assoc :m 1)
+                (assoc :connectivity connectivity)
                 (assoc :width width)
                 (assoc :height height))
         coordinates (for [y (range height) x (range width)] {:x x, :y y})]
@@ -296,7 +298,7 @@
 
 (defn ccl
   "Do CCL"
-  [width height color data]
-  (let [filled_tabs (pass1 width height color data)]
+  [width height color connectivity data]
+  (let [filled_tabs (pass1 width height color connectivity data)]
         (pass2 width height filled_tabs)))
 
