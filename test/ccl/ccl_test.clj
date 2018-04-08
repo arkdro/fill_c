@@ -154,6 +154,46 @@
           exp [{:x 2, :y 0} {:x 3, :y 0} {:x 2, :y 1}]]
       (is (= act exp)))))
 
+(deftest get_mask_coordinates_6_test1
+  (testing "get mask coordinates, 6 connectivity, 1"
+    (let [coord {:x 0, :y 0}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp []]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test2
+  (testing "get mask coordinates, 6 connectivity, 2"
+    (let [coord {:x 0, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 0, :y 0}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test3
+  (testing "get mask coordinates, 6 connectivity, 3"
+    (let [coord {:x 1, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 0, :y 0} {:x 1, :y 0} {:x 0, :y 1}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test4
+  (testing "get mask coordinates, 6 connectivity, 4"
+    (let [coord {:x 3, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 2, :y 0} {:x 3, :y 0} {:x 2, :y 1}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test5
+  (testing "get mask coordinates, 6 connectivity, 5"
+    (let [coord {:x 3, :y 2}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 3, :y 1} {:x 2, :y 2}]]
+      (is (= act exp)))))
+
 (deftest get_mask_color_test
   (testing "get mask color"
     (let [coord {:x 3, :y 1}
