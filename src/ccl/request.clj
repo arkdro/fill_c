@@ -27,7 +27,7 @@
   (mapv #(replace_background_points_one_item ccl-output-background %) expected))
 
 (defn generate_one_request
-  "Generate one request for a fill"
+  "Generate one ccl request"
   [width height color_range opts]
   (let [plate (fill.plate/build_plate {:color_range color_range
                                        :width width
