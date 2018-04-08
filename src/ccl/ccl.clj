@@ -68,7 +68,7 @@
         :default {:x (inc x)
                   :y (dec y)}))
 
-(defn get_mask_coordinates
+(defn get_mask_coordinates_8
   "Get coordinates of mask points for the specified coordinates.
   It uses 8-connectivity."
   [coord width]
@@ -82,7 +82,7 @@
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
   [coord width data]
-  (let [coordinates (get_mask_coordinates coord width)]
+  (let [coordinates (get_mask_coordinates_8 coord width)]
     (map #(get_color % data) coordinates)))
 
 (defn background_mask?
@@ -118,7 +118,7 @@
 (defn get_mask_labels
   "Get existing labels for points in mask"
   [coord width result_labels]
-  (let [coordinates (get_mask_coordinates coord width)
+  (let [coordinates (get_mask_coordinates_8 coord width)
         labels (map #(get_label % result_labels) coordinates)]
     (filter integer? labels)))
 
