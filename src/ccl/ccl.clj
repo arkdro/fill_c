@@ -79,6 +79,17 @@
         coordinates [upper_left upper upper_right left]]
     (filter some? coordinates)))
 
+(defn get_mask_coordinates_6_even
+  "Get coordinates of mask points for the specified coordinates,
+  when the y-coordinate is even.
+  It uses 6-connectivity."
+  [coord width]
+  (let [left (get_left_coord coord)
+        upper (get_upper_coord coord)
+        upper_right (get_upper_right_coord coord width)
+        coordinates [upper upper_right left]]
+    (filter some? coordinates)))
+
 (defn get_mask_colors
   "Get colors for the mask at the specified coordinates"
   [coord width data]
