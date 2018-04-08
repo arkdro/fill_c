@@ -158,8 +158,9 @@
   (testing "get mask color"
     (let [coord {:x 3, :y 1}
           width 4
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (get_mask_colors coord width data)
+          act (get_mask_colors coord width connectivity data)
           exp [2 1 5]]
       (is (= act exp)))))
 
@@ -168,8 +169,9 @@
     (let [coord {:x 2, :y 1}
           width 4
           color 2
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (background_mask? coord width color data)
+          act (background_mask? coord width color connectivity data)
           exp false]
       (is (= act exp)))))
 
@@ -178,8 +180,9 @@
     (let [coord {:x 2, :y 1}
           width 4
           color 3
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (background_mask? coord width color data)
+          act (background_mask? coord width color connectivity data)
           exp true]
       (is (= act exp)))))
 
@@ -425,6 +428,7 @@
           coord {:x 2, :y 1}
           acc {:m 1
                :width 4
+               :connectivity 8
                :repr_tab [:no :no :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no :no :no :no :no :no :no :no :no :no :no :no]
                :result_labels [[:no :no :no :no]
@@ -434,6 +438,7 @@
           act (pass1_step color data acc coord)
           exp {:m 2
                :width 4
+               :connectivity 8
                :repr_tab [:no 1 :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no :last :no :no :no :no :no :no :no :no :no :no]
                :result_labels [[:no :no :no :no]
@@ -452,6 +457,7 @@
           coord {:x 5, :y 3}
           acc {:m 5
                :width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -462,6 +468,7 @@
           act (pass1_step color data acc coord)
           exp {:m 5
                :width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
@@ -476,14 +483,16 @@
     (let [width 9
           height 4
           color 1
+          connectivity 8
           data [[0 0 0 0 0 0 0 0 1]
                 [0 0 1 0 1 0 0 0 1]
                 [0 0 1 0 1 0 1 1 1]
                 [1 1 0 1 0 1 0 0 0]]
-          act (pass1 width height color data)
+          act (pass1 width height color connectivity data)
           exp {:m 6
                :width 9
                :height 4
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
                :tail [:no 3 3 3 4 5 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
@@ -576,12 +585,13 @@
     (let [width 9
           height 5
           color 1
+          connectivity 8
           data [[0 0 0 0 0 0 0 0 1]
                 [0 0 1 0 1 0 0 0 1]
                 [0 0 1 0 1 0 1 1 1]
                 [1 0 0 1 0 1 0 0 0]
                 [0 1 0 0 1 0 0 1 1]]
-          act (ccl width height color data)
+          act (ccl width height color connectivity data)
           exp [[:no :no :no :no :no :no :no :no   1]
                [:no :no   1 :no   1 :no :no :no   1]
                [:no :no   1 :no   1 :no   1   1   1]
