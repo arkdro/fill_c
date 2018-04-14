@@ -153,15 +153,15 @@
 
 (defn get_mask_labels
   "Get existing labels for points in mask"
-  [coord width result_labels]
-  (let [coordinates (get_mask_coordinates_8 coord width)
+  [coord width connectivity result_labels]
+  (let [coordinates (get_mask_coordinates coord width connectivity)
         labels (map #(get_label % result_labels) coordinates)]
     (filter integer? labels)))
 
 (defn get_min_label
   "Get minimal label for points of a mask"
-  [coord {:keys [width result_labels]}]
-  (let [labels (get_mask_labels coord width result_labels)]
+  [coord {:keys [width connectivity result_labels]}]
+  (let [labels (get_mask_labels coord width connectivity result_labels)]
     ;; FIXME crash on empty seq. E.g. when coord = (0, 0). Should not happen.
     (apply min labels)))
 
@@ -241,9 +241,9 @@
 
 (defn merge_mask_labels
   "Merge labels for the point and points in a mask"
-  [{:keys [width result_labels] :as acc}
+  [{:keys [width connectivity result_labels] :as acc}
    coord]
-  (let [labels (get_mask_labels coord width result_labels)
+  (let [labels (get_mask_labels coord width connectivity result_labels)
         coord_label (get_label coord result_labels)]
     (reduce #(merge_labels coord_label %2 %1) acc labels)))
 
