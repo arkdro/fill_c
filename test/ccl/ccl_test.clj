@@ -639,3 +639,37 @@
                [:no   5 :no :no   1 :no :no   6   6]]]
       (is (= act exp)))))
 
+(deftest ccl_test2
+  (testing "ccl6, 1"
+    (let [width 3
+          height 3
+          color 1
+          connectivity 6
+          data [ [0 1 0]
+                [1 0 1]
+                 [0 1 0]]
+          act (ccl width height color connectivity data)
+          exp [[:no   1 :no]
+               [  2 :no   1]
+               [:no   1 :no]]]
+      (is (= act exp)))))
+
+(deftest ccl_test3
+  (testing "ccl6, 2"
+    (let [width 9
+          height 5
+          color 1
+          connectivity 6
+          data [ [0 0 0 0 0 0 0 0 1]
+                [0 0 1 0 1 0 0 0 1]
+                 [0 0 1 0 1 0 1 1 1]
+                [1 0 0 1 0 1 0 0 0]
+                 [0 1 0 0 1 0 0 1 1]]
+          act (ccl width height color connectivity data)
+          exp [[:no :no :no :no :no :no :no :no   1]
+               [:no :no   2 :no   3 :no :no :no   1]
+               [:no :no   2 :no   3 :no   1   1   1]
+               [  5 :no :no   2 :no   3 :no :no :no]
+               [:no   6 :no :no   3 :no :no   7   7]]]
+      (is (= act exp)))))
+
