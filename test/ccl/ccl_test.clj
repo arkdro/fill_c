@@ -258,8 +258,9 @@
   (testing "get_mask_labels, 1"
     (let [coord {:x 0, :y 0}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp []]
       (is (= act exp)))))
 
@@ -267,8 +268,9 @@
   (testing "get_mask_labels, 2"
     (let [coord {:x 0, :y 1}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp [2]]
       (is (= act exp)))))
 
@@ -276,8 +278,9 @@
   (testing "get_mask_labels, 3"
     (let [coord {:x 2, :y 1}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp [2 1 2]]
       (is (= act exp)))))
 
@@ -287,6 +290,7 @@
           width 4
           result_labels [[:no 2 :no 1] [:no 3 :no :no] [:no :no :no :no]]
           acc {:width width
+               :connectivity 8
                :result_labels result_labels}
           act (get_min_label coord acc)
           exp 1]
@@ -407,6 +411,7 @@
   (testing "merge_mask_labels"
     (let [coord {:x 5, :y 3}
           acc {:width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -416,6 +421,7 @@
                                [  5   2 :no   2 :no   3 :no :no :no]]}
           act (merge_mask_labels acc coord)
           exp {:width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
@@ -429,6 +435,7 @@
   (testing "assign_minimal_label"
     (let [coord {:x 5, :y 3}
           acc {:width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -438,6 +445,7 @@
                                [  5   2 :no   2 :no :no :no :no :no]]}
           act (assign_minimal_label acc coord)
           exp {:width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
