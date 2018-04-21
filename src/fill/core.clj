@@ -52,6 +52,10 @@
     :default 1
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 %) "Must be bigger than 0"]]
+   ["-c" "--connectivity N" "connectivity: 4, 6, 8"
+    :default 8
+    :parse-fn #(Integer/parseInt %)
+    :validate [#(contains? #{4 6 8} %) "Must be one of these: 4, 6, 8"]]
    ["-d" "--dir DIR" "output directory for requests"
     :default "."
     :validate [string? "Must be string"]]

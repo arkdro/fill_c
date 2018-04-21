@@ -11,8 +11,8 @@
     (che/generate-string request json_opts)))
 
 (defn generate_expected_data
-  [width height color_range data]
-  (mapv #(ccl.ccl/ccl width height % data) (range color_range)))
+  [width height color_range {connectivity :connectivity} data]
+  (mapv #(ccl.ccl/ccl width height % connectivity data) (range color_range)))
 
 (defn replace_background_points_one_row
   [ccl-output-background row]
@@ -27,14 +27,15 @@
   (mapv #(replace_background_points_one_item ccl-output-background %) expected))
 
 (defn generate_one_request
-  "Generate one request for a fill"
+  "Generate one ccl request"
   [width height color_range opts]
   (let [plate (fill.plate/build_plate {:color_range color_range
                                        :width width
                                        :height height}
                                       opts)
         data (get plate :data)
-        expected (generate_expected_data width height color_range data)
+        expected (generate_expected_data width height color_range opts
+                                         data)
         expected2 (replace_background_points expected opts)
         request {:input_data plate
                  :expected_data expected2}]

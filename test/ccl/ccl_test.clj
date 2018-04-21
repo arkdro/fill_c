@@ -114,52 +114,93 @@
           exp nil]
       (is (= act exp)))))
 
-(deftest get_mask_coordinates_test1
+(deftest get_mask_coordinates_8_test1
   (testing "get mask coordinates, 1"
     (let [coord {:x 0, :y 0}
           width 4
-          act (get_mask_coordinates coord width)
+          act (get_mask_coordinates_8 coord width)
           exp []]
       (is (= act exp)))))
 
-(deftest get_mask_coordinates_test2
+(deftest get_mask_coordinates_8_test2
   (testing "get mask coordinates, 2"
     (let [coord {:x 0, :y 1}
           width 4
-          act (get_mask_coordinates coord width)
+          act (get_mask_coordinates_8 coord width)
           exp [{:x 0, :y 0} {:x 1, :y 0}]]
       (is (= act exp)))))
 
-(deftest get_mask_coordinates_test3
+(deftest get_mask_coordinates_8_test3
   (testing "get mask coordinates, 3"
     (let [coord {:x 1, :y 1}
           width 4
-          act (get_mask_coordinates coord width)
+          act (get_mask_coordinates_8 coord width)
           exp [{:x 0, :y 0} {:x 1, :y 0} {:x 2, :y 0} {:x 0, :y 1}]]
       (is (= act exp)))))
 
-(deftest get_mask_coordinates_test3
+(deftest get_mask_coordinates_8_test3
   (testing "get mask coordinates, 3"
     (let [coord {:x 3, :y 0}
           width 4
-          act (get_mask_coordinates coord width)
+          act (get_mask_coordinates_8 coord width)
           exp [{:x 2, :y 0}]]
       (is (= act exp)))))
 
-(deftest get_mask_coordinates_test4
+(deftest get_mask_coordinates_8_test4
   (testing "get mask coordinates, 4"
     (let [coord {:x 3, :y 1}
           width 4
-          act (get_mask_coordinates coord width)
+          act (get_mask_coordinates_8 coord width)
           exp [{:x 2, :y 0} {:x 3, :y 0} {:x 2, :y 1}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test1
+  (testing "get mask coordinates, 6 connectivity, 1"
+    (let [coord {:x 0, :y 0}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp []]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test2
+  (testing "get mask coordinates, 6 connectivity, 2"
+    (let [coord {:x 0, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 0, :y 0}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test3
+  (testing "get mask coordinates, 6 connectivity, 3"
+    (let [coord {:x 1, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 0, :y 0} {:x 1, :y 0} {:x 0, :y 1}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test4
+  (testing "get mask coordinates, 6 connectivity, 4"
+    (let [coord {:x 3, :y 1}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 2, :y 0} {:x 3, :y 0} {:x 2, :y 1}]]
+      (is (= act exp)))))
+
+(deftest get_mask_coordinates_6_test5
+  (testing "get mask coordinates, 6 connectivity, 5"
+    (let [coord {:x 3, :y 2}
+          width 4
+          act (get_mask_coordinates_6 coord width)
+          exp [{:x 3, :y 1} {:x 2, :y 2}]]
       (is (= act exp)))))
 
 (deftest get_mask_color_test
   (testing "get mask color"
     (let [coord {:x 3, :y 1}
           width 4
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (get_mask_colors coord width data)
+          act (get_mask_colors coord width connectivity data)
           exp [2 1 5]]
       (is (= act exp)))))
 
@@ -168,8 +209,9 @@
     (let [coord {:x 2, :y 1}
           width 4
           color 2
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (background_mask? coord width color data)
+          act (background_mask? coord width color connectivity data)
           exp false]
       (is (= act exp)))))
 
@@ -178,8 +220,9 @@
     (let [coord {:x 2, :y 1}
           width 4
           color 3
+          connectivity 8
           data [[0 1 2 1] [3 4 5 13] [6 7 8 9]]
-          act (background_mask? coord width color data)
+          act (background_mask? coord width color connectivity data)
           exp true]
       (is (= act exp)))))
 
@@ -215,8 +258,9 @@
   (testing "get_mask_labels, 1"
     (let [coord {:x 0, :y 0}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp []]
       (is (= act exp)))))
 
@@ -224,8 +268,9 @@
   (testing "get_mask_labels, 2"
     (let [coord {:x 0, :y 1}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp [2]]
       (is (= act exp)))))
 
@@ -233,8 +278,9 @@
   (testing "get_mask_labels, 3"
     (let [coord {:x 2, :y 1}
           width 4
+          connectivity 8
           result_labels [[:no 2 :no 1] [:no 2 :no :no] [:no :no :no :no]]
-          act (get_mask_labels coord width result_labels)
+          act (get_mask_labels coord width connectivity result_labels)
           exp [2 1 2]]
       (is (= act exp)))))
 
@@ -244,6 +290,7 @@
           width 4
           result_labels [[:no 2 :no 1] [:no 3 :no :no] [:no :no :no :no]]
           acc {:width width
+               :connectivity 8
                :result_labels result_labels}
           act (get_min_label coord acc)
           exp 1]
@@ -364,6 +411,7 @@
   (testing "merge_mask_labels"
     (let [coord {:x 5, :y 3}
           acc {:width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -373,6 +421,7 @@
                                [  5   2 :no   2 :no   3 :no :no :no]]}
           act (merge_mask_labels acc coord)
           exp {:width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
@@ -386,6 +435,7 @@
   (testing "assign_minimal_label"
     (let [coord {:x 5, :y 3}
           acc {:width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -395,6 +445,7 @@
                                [  5   2 :no   2 :no :no :no :no :no]]}
           act (assign_minimal_label acc coord)
           exp {:width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
@@ -425,6 +476,7 @@
           coord {:x 2, :y 1}
           acc {:m 1
                :width 4
+               :connectivity 8
                :repr_tab [:no :no :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no :no :no :no :no :no :no :no :no :no :no :no]
                :result_labels [[:no :no :no :no]
@@ -434,6 +486,7 @@
           act (pass1_step color data acc coord)
           exp {:m 2
                :width 4
+               :connectivity 8
                :repr_tab [:no 1 :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no :last :no :no :no :no :no :no :no :no :no :no]
                :result_labels [[:no :no :no :no]
@@ -452,6 +505,7 @@
           coord {:x 5, :y 3}
           acc {:m 5
                :width 9
+               :connectivity 8
                :repr_tab [:no 1 2 2 1 2 :no :no :no :no]
                :next_label [:no 4 5 :last :last 3 :no :no :no :no :no :no]
                :tail [:no 4 3 :no :no :no :no :no :no :no :no :no]
@@ -462,6 +516,7 @@
           act (pass1_step color data acc coord)
           exp {:m 5
                :width 9
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no]
                :tail [:no 3 3 :no :no :no :no :no :no :no :no :no]
@@ -476,14 +531,16 @@
     (let [width 9
           height 4
           color 1
+          connectivity 8
           data [[0 0 0 0 0 0 0 0 1]
                 [0 0 1 0 1 0 0 0 1]
                 [0 0 1 0 1 0 1 1 1]
                 [1 1 0 1 0 1 0 0 0]]
-          act (pass1 width height color data)
+          act (pass1 width height color connectivity data)
           exp {:m 6
                :width 9
                :height 4
+               :connectivity 8
                :repr_tab [:no 1 1 1 1 1 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
                :next_label [:no 4 5 :last 2 3 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
                :tail [:no 3 3 3 4 5 :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no :no]
@@ -576,16 +633,51 @@
     (let [width 9
           height 5
           color 1
+          connectivity 8
           data [[0 0 0 0 0 0 0 0 1]
                 [0 0 1 0 1 0 0 0 1]
                 [0 0 1 0 1 0 1 1 1]
                 [1 0 0 1 0 1 0 0 0]
                 [0 1 0 0 1 0 0 1 1]]
-          act (ccl width height color data)
+          act (ccl width height color connectivity data)
           exp [[:no :no :no :no :no :no :no :no   1]
                [:no :no   1 :no   1 :no :no :no   1]
                [:no :no   1 :no   1 :no   1   1   1]
                [  5 :no :no   1 :no   1 :no :no :no]
                [:no   5 :no :no   1 :no :no   6   6]]]
+      (is (= act exp)))))
+
+(deftest ccl_test2
+  (testing "ccl6, 1"
+    (let [width 3
+          height 3
+          color 1
+          connectivity 6
+          data [ [0 1 0]
+                [1 0 1]
+                 [0 1 0]]
+          act (ccl width height color connectivity data)
+          exp [[:no   1 :no]
+               [  2 :no   1]
+               [:no   1 :no]]]
+      (is (= act exp)))))
+
+(deftest ccl_test3
+  (testing "ccl6, 2"
+    (let [width 9
+          height 5
+          color 1
+          connectivity 6
+          data [ [0 0 0 0 0 0 0 0 1]
+                [0 0 1 0 1 0 0 0 1]
+                 [0 0 1 0 1 0 1 1 1]
+                [1 0 0 1 0 1 0 0 0]
+                 [0 1 0 0 1 0 0 1 1]]
+          act (ccl width height color connectivity data)
+          exp [[:no :no :no :no :no :no :no :no   1]
+               [:no :no   2 :no   3 :no :no :no   1]
+               [:no :no   2 :no   3 :no   1   1   1]
+               [  5 :no :no   2 :no   3 :no :no :no]
+               [:no   6 :no :no   3 :no :no   7   7]]]
       (is (= act exp)))))
 

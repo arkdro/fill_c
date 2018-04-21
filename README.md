@@ -7,6 +7,26 @@ The program generates requests for flood fill or CCL. The request contains
 width, height, color range, 2d array of numbers, steps to run on the array and
 an expected 2d array of number.
 
+## 8 connectivity
+
+```
+1 2 3
+4 5 6
+7 8 9
+```
+
+5 connected to 1 2 3 4.
+
+## 6 connectivity
+
+```
+ 1 2 3
+4 5 6
+ 7 8 9
+```
+
+5 connected to 1 2 4.
+
 ## Usage
 
     $ java -jar fill-0.0.2-standalone.jar [args]

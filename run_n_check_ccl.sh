@@ -3,23 +3,24 @@
 # script to run ccl generator and checker together
 
 do_one_dir(){
-    dir="$1"
-    generator_params="-d $dir -n $number_of_requests \
+	dir="$1"
+	generator_params="-d $dir -n $number_of_requests \
 		--min-width $min_width --max-width $max_width \
 		--min-height $min_height --max-height $max_height \
 		--probability $probability \
 		--ccl-output-background -1 \
-        -t ccl \
+		-t ccl --connectivity $connectivity \
 		--min-color-range $min_color_range --max-color-range $max_color_range"
-    checker_params="--remove --indir $dir"
-    $generator $generator_params
-    $checker $checker_params
+	checker_params="--connectivity $connectivity --remove --indir $dir"
+	$generator $generator_params
+	$checker $checker_params
 }
 
 export RLOG_LOG_LEVEL=ERROR
 
 generator="java -jar fill.jar"
 checker="./ccl_g"
+connectivity=6
 number_of_requests=10
 min_width=4
 max_width=100
