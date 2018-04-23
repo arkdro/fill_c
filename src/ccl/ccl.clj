@@ -7,7 +7,7 @@
   [width]
   (vec (for [_ (range width)] :no)))
 
-(defn- init_2d_array
+(defn init_2d_array
   [width height]
   (doall (vec (for [_ (range height)] (init_1d_array width)))))
 
