@@ -1,8 +1,12 @@
 (ns table.table)
 
-(defn merge_one_color
-  [acc ccl_data]
-  )
+(defn merge_one_color_over_coordinates
+  "Get a label from ccl data using coordinates and put the label
+  and a color into an accumulator"
+  [data {:keys [x y] :as coord} color one_color_ccl_data]
+  (let [label (get-in [y x] one_color_ccl_data)
+        val {:l label, :c color}]
+    (assoc-in data [y x] val)))
 
 (defn merge_one_color
   [{:keys [color width height data] :as acc} one_color_ccl_data]
