@@ -4,9 +4,11 @@
   "Get a label from ccl data using coordinates and put the label
   and a color into an accumulator"
   [data {:keys [x y] :as coord} color one_color_ccl_data]
-  (let [label (get-in [y x] one_color_ccl_data)
+  (let [label (get-in one_color_ccl_data [y x])
         val {:l label, :c color}]
-    (assoc-in data [y x] val)))
+    (if (pos-int? label)
+      (assoc-in data [y x] val)
+      data)))
 
 (defn merge_one_color
   [{:keys [color width height data] :as acc} one_color_ccl_data]
