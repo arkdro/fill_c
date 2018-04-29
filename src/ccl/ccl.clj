@@ -307,3 +307,7 @@
   (let [filled_tabs (pass1 width height color connectivity data)]
         (pass2 width height filled_tabs)))
 
+(defn ccl_multi_color
+  "Do CCL for a color range"
+  [width height color_range connectivity data]
+  (mapv #(ccl width height % connectivity data) (range color_range)))

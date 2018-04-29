@@ -12,7 +12,7 @@
 
 (defn generate_expected_data
   [width height color_range {connectivity :connectivity} data]
-  (mapv #(ccl.ccl/ccl width height % connectivity data) (range color_range)))
+  (ccl.ccl/ccl_multi_color width height color_range connectivity data))
 
 (defn replace_background_points_one_row
   [ccl-output-background row]
