@@ -22,7 +22,10 @@
 (defn add_neigbours_to_node
   "Add cells with the same node id to the current node.
   Add cells with diffrent node ids as neigbours."
-  [node same_id different_ids])
+  [node same_id different_ids]
+  (-> node
+      (add_same_id_cells_to_node same_id)
+      (add_different_ids_to_node different_ids)))
 
 (defn add_neigbours_to_graph
   "For each of nodes: add the id as a neigbour node and update the accumulator"
