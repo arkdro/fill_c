@@ -5,6 +5,13 @@
 ;; neigbour nodes
 ;; cells
 
+(defn add_same_id_cells_to_node
+  "Add cells with the same node id to a node"
+  [{:keys [cells] :as node} cells_to_add]
+  (let [only_coordinates (map #(select-keys % [:x :y]) cells_to_add)
+        new_cells (apply conj cells only_coordinates)]
+    (assoc node :cells new_cells)))
+
 (defn add_neigbours_to_node
   "Add cells with the same node id to the current node.
   Add cells with diffrent node ids as neigbours."
