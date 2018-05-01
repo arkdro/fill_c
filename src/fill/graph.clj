@@ -12,6 +12,13 @@
         new_cells (apply conj cells only_coordinates)]
     (assoc node :cells new_cells)))
 
+(defn add_different_ids_to_node
+  "Add cells with diffrent node ids as neigbours"
+  [{:keys [neigbours] :as node} cells_to_add]
+  (let [ids (map #(get % :id) cells_to_add)
+        new_neigbours (apply conj neigbours ids)]
+    (assoc node :neigbours new_neigbours)))
+
 (defn add_neigbours_to_node
   "Add cells with the same node id to the current node.
   Add cells with diffrent node ids as neigbours."
