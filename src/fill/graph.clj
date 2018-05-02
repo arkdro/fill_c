@@ -36,8 +36,10 @@
     (assoc acc id new_node)))
 
 (defn add_neigbours_to_graph
-  "For each of nodes: add the id as a neigbour node and update the accumulator"
-  [acc id different_ids])
+  "Add the id to neigbour nodes and then add the neigbour nodes
+  to the accumulator"
+  [acc id neigbours]
+  (reduce #(add_one_neigbour_to_graph %1 %2 id) acc neigbours))
 
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
