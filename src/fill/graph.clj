@@ -27,6 +27,14 @@
       (add_same_id_cells_to_node same_id)
       (add_different_ids_to_node different_ids)))
 
+(defn add_one_neigbour_to_graph
+  "Add id to the neigbour and then add the neigbour to the accumulator"
+  [acc {:keys [id]} current_id]
+  (let [{:keys [neigbours] :as node} (get acc id {:neigbours #{} :cells #{}})
+        new_neigbours (conj neigbours current_id)
+        new_node (assoc node :neigbours new_neigbours)]
+    (assoc acc id new_node)))
+
 (defn add_neigbours_to_graph
   "For each of nodes: add the id as a neigbour node and update the accumulator"
   [acc id different_ids])
