@@ -45,6 +45,10 @@
   [{:keys [x y]} ccl_data]
   (get-in ccl_data [y x :id]))
 
+(defn get_node
+  [acc id]
+  (get acc id))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord}]
