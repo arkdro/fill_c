@@ -41,6 +41,10 @@
   [acc id neigbours]
   (reduce #(add_one_neigbour_to_graph %1 %2 id) acc neigbours))
 
+(defn get_node_id_by_cell
+  [{:keys [x y]} ccl_data]
+  (get-in ccl_data [y x :id]))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord}]
