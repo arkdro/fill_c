@@ -49,6 +49,10 @@
   [acc id]
   (get acc id))
 
+(defn put_node
+  [acc id node]
+  (assoc acc id node))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord}]
