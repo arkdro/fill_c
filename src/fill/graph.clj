@@ -55,7 +55,7 @@
 
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
-  [acc {:keys [x y] :as coord}]
+  [acc {:keys [x y] :as coord} ccl_data]
   (let [id (get_node_id_by_cell coord ccl_data)
         [same_id different_ids] (get_neigbours id coord ccl_data)
         node (get_node acc id)
@@ -69,11 +69,11 @@
 
 (defn build_graph
   "Build a graph from merged ccl data"
-  []
+  [ccl_data]
   (let [
         coordinates (generate_coordinates )
         acc {}
         ]
-    (reduce process_one_cell acc coordinates)
+    (reduce #(process_one_cell %1 %2 ccl_data) acc coordinates)
     )
   )
