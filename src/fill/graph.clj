@@ -77,9 +77,10 @@
 
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
-  [acc {:keys [x y] :as coord} ccl_data]
+  [acc {:keys [x y] :as coord} width connectivity ccl_data]
   (let [id (get_node_id_by_cell coord ccl_data)
-        [same_id different_ids] (get_neigbours id coord ccl_data)
+        [same_id different_ids] (get_neigbours id coord width connectivity
+                                               ccl_data)
         node (get_node acc id)
         new_node (add_neigbours_to_node node same_id different_ids)
         acc2 (add_neigbours_to_graph acc id different_ids)
