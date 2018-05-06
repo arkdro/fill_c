@@ -78,7 +78,8 @@
 (defn get_mask_labels
   "Get existing labels for points in mask"
   [coord width connectivity result_labels]
-  (let [coordinates (get_mask_coordinates coord width connectivity)
+  (let [coordinates (ccl.coordinates/get_mask_coordinates coord width
+                                                          connectivity)
         labels (map #(get_label % result_labels) coordinates)]
     (filter integer? labels)))
 
