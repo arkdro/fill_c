@@ -1,4 +1,5 @@
-(ns table.table)
+(ns table.table
+  (:require [ccl.coordinates]))
 
 (defn merge_one_color_at_coordinates
   "Get a label from ccl data using coordinates and put the label
@@ -12,7 +13,7 @@
 
 (defn merge_one_color
   [{:keys [color width height data] :as acc} one_color_ccl_data]
-  (let [coordinates (ccl.ccl/generate_coordinates width height)
+  (let [coordinates (ccl.coordinates/generate_coordinates width height)
         new_data (reduce #(merge_one_color_at_coordinates %1 %2 color
                                                             one_color_ccl_data)
                          data coordinates)]
