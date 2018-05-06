@@ -84,11 +84,8 @@
         node (get_node acc id)
         new_node (add_neigbours_to_node node same_id different_ids)
         acc2 (add_neigbours_to_graph acc id different_ids)
-        acc3 (put_node acc2 id node)
-        ]
-    acc3
-    )
-  )
+        acc3 (put_node acc2 id node)]
+    acc3))
 
 (defn build_graph
   "Build a graph from merged ccl data"
