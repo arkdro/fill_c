@@ -66,6 +66,15 @@
   [id {neigbour_id :id}]
   (= id neigbour_id))
 
+(defn get_neigbours
+  [id coord width connectivity ccl_data]
+  (let [coordinates (get_neigbour_coordinates coord width connectivity)
+        valid (filter some? coordinates)
+        nodes (map #(get_one_neigbour ccl_data %) valid)
+        {same_id true
+         different_ids false} (group-by #(same_id? id %) nodes)]
+    [same_id different_ids]))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord} ccl_data]
