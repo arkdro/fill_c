@@ -53,6 +53,10 @@
   [acc id node]
   (assoc acc id node))
 
+(defn get_one_neigbour
+  [ccl_data {:keys [x y]}]
+  (get ccl_data [y x]))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord} ccl_data]
