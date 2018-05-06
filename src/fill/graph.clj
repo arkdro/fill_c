@@ -1,4 +1,5 @@
-(ns fill.graph)
+(ns fill.graph
+  (:require [ccl.coordinates]))
 
 ;; A node:
 ;; id
@@ -56,6 +57,10 @@
 (defn get_one_neigbour
   [ccl_data {:keys [x y]}]
   (get ccl_data [y x]))
+
+(defn get_neigbour_coordinates
+  [coord width connectivity]
+  (ccl.coordinates/get_mask_coordinates coord width connectivity))
 
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
