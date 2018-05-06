@@ -77,3 +77,8 @@
     6 (get_mask_coordinates_6 coord width)
     8 (get_mask_coordinates_8 coord width)))
 
+(defn generate_coordinates
+  "Generate x, y coordinates from [0, 0] to (width, height)."
+  [width height]
+  (for [y (range height) x (range width)] {:x x, :y y}))
+

@@ -191,11 +191,6 @@
                                                             acc coord)
     :default (assign_minimal_label acc coord)))
 
-(defn generate_coordinates
-  "Generate x, y coordinates from [0, 0] to (width, height)."
-  [width height]
-  (for [y (range height) x (range width)] {:x x, :y y}))
-
 (defn pass1
   "Pass 1"
   [width height color connectivity data]
@@ -205,7 +200,7 @@
                 (assoc :connectivity connectivity)
                 (assoc :width width)
                 (assoc :height height))
-        coordinates (generate_coordinates width height)]
+        coordinates (ccl.coordinates/generate_coordinates width height)]
     (reduce #(pass1_step color data %1 %2) acc coordinates)))
 
 (defn fill_result_point
@@ -222,7 +217,7 @@
   "Pass 2"
   [width height filled_tabs]
   (let [result_data (init_2d_array width height)
-        coordinates (generate_coordinates width height)]
+        coordinates (ccl.coordinates/generate_coordinates width height)]
     (reduce #(fill_result_point %2 filled_tabs %1) result_data coordinates)))
 
 (defn ccl
