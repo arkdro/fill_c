@@ -62,6 +62,10 @@
   [coord width connectivity]
   (ccl.coordinates/get_mask_coordinates coord width connectivity))
 
+(defn- same_id?
+  [id {neigbour_id :id}]
+  (= id neigbour_id))
+
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
   [acc {:keys [x y] :as coord} ccl_data]
