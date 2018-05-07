@@ -58,3 +58,21 @@
           act (add_one_neigbour_to_graph acc node current_id)]
       (is (= act exp)))))
 
+(deftest add_one_neigbour_to_graph_test2
+  (testing "Add one neigbour to the graph, 2"
+    (let [
+          node1 {:id 1
+                :cells #{{:x 1, :y 0}}
+                :neigbours #{}}
+          node2 {:id 2
+                :cells #{{:x 2, :y 1}}
+                :neigbours #{5}}
+          current_id 5
+          acc {2 node2}
+          exp {2 node2
+               1 {:id 1
+                  :cells #{}
+                  :neigbours #{5}}}
+          act (add_one_neigbour_to_graph acc node1 current_id)]
+      (is (= act exp)))))
+
