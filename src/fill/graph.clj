@@ -76,7 +76,7 @@
         nodes (map #(get_one_neigbour ccl_data %) valid)
         {same_id true
          different_ids false} (group-by #(same_id? id %) nodes)]
-    [same_id different_ids]))
+    (replace {nil []} [same_id different_ids])))
 
 (defn process_one_cell
   "Add a cell and its neigbours to a graph"
