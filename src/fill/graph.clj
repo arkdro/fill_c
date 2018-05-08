@@ -59,7 +59,7 @@
 
 (defn get_one_neigbour
   [ccl_data {:keys [x y]}]
-  (get ccl_data [y x]))
+  (get-in ccl_data [y x]))
 
 (defn get_neigbour_coordinates
   [coord width connectivity]
