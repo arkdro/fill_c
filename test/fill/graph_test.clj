@@ -109,3 +109,14 @@
           act (get_node_id_by_cell node ccl_data)]
       (is (= act exp)))))
 
+(deftest get_one_neigbour_test
+  (testing "get node id by cell"
+    (let [node {:x 0
+                :y 1}
+          ccl_data [[0 1 0]
+                    [{:id 2} 0 1]
+                    [0 0 1]]
+          exp {:id 2}
+          act (get_one_neigbour ccl_data node)]
+      (is (= act exp)))))
+
