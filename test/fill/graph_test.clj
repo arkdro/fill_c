@@ -120,3 +120,70 @@
           act (get_one_neigbour ccl_data node)]
       (is (= act exp)))))
 
+(deftest get_neigbours_test1
+  (testing "get neigbours, 1"
+    (let [id 2
+          coord {:x 0
+                 :y 1}
+          width 3
+          connectivity 6
+          ccl_data [[{:id 1} {:id 3} {:id 6}]
+                    [{:id 2} {:id 5} {:id 4}]
+                    [{:id 4} {:id 7} {:id 8}]]
+          exp_same_ids []
+          exp_different_ids [{:id 1}]
+          exp [exp_same_ids exp_different_ids]
+          act (get_neigbours id coord width connectivity ccl_data)]
+      (is (= act exp)))))
+
+(deftest get_neigbours_test2
+  (testing "get neigbours, 2"
+    (let [id 3
+          coord {:x 1
+                 :y 1}
+          width 3
+          connectivity 6
+          ccl_data [[{:id 5} {:id 3, :x 1, :y 0} {:id 1}]
+                    [{:id 2} {:id 3} {:id 4}]
+                    [{:id 4} {:id 1} {:id 3}]]
+          exp_same_ids [{:x 1, :y 0, :id 3}]
+          exp_different_ids [{:id 5} {:id 2}]
+          exp [exp_same_ids exp_different_ids]
+          act (get_neigbours id coord width connectivity ccl_data)]
+      (is (= act exp)))))
+
+(deftest get_neigbours_test3
+  (testing "get neigbours, 3"
+    (let [id 2
+          coord {:x 0
+                 :y 1}
+          width 3
+          connectivity 8
+          ccl_data [[{:id 1} {:id 3} {:id 8}]
+                    [{:id 2} {:id 5} {:id 4}]
+                    [{:id 4} {:id 7} {:id 6}]]
+          exp_same_ids []
+          exp_different_ids [{:id 1}, {:id 3}]
+          exp [exp_same_ids exp_different_ids]
+          act (get_neigbours id coord width connectivity ccl_data)]
+      (is (= act exp)))))
+
+(deftest get_neigbours_test4
+  (testing "get neigbours, 4"
+    (let [id 3
+          coord {:x 1
+                 :y 1}
+          width 3
+          connectivity 8
+          ccl_data [[{:id 5} {:id 3, :x 1, :y 0} {:id 1}]
+                    [{:id 2} {:id 3} {:id 4}]
+                    [{:id 4} {:id 6} {:id 7}]]
+          exp_same_ids [{:x 1, :y 0, :id 3}]
+          exp_different_ids [{:id 5} {:id 1} {:id 2}]
+          exp [exp_same_ids exp_different_ids]
+          [act_same_ids act_different_ids] (get_neigbours id coord width
+                                                          connectivity
+                                                          ccl_data)]
+      (is (= act_same_ids exp_same_ids))
+      (is (= act_different_ids exp_different_ids)))))
+
