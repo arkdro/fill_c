@@ -187,3 +187,56 @@
       (is (= act_same_ids exp_same_ids))
       (is (= act_different_ids exp_different_ids)))))
 
+(deftest process_one_cell_test1
+  (testing "process one cell, 1"
+    (let [acc {3 {:id 3,
+                  :cells #{{:x 1, :y 0}}
+                  :neigbours #{5}}}
+          coord {:x 1
+                 :y 1}
+          width 3
+          connectivity 6
+          ccl_data [[{:id 5, :x 0, :y 0} {:id 3, :x 1, :y 0} {:id 1}]
+                    [{:id 2} {:id 3} {:id 4}]
+                    [{:id 4} {:id 6} {:id 7}]]
+          exp {3 {:id 3,
+                  :cells #{{:x 1, :y 0}
+                           {:x 1, :y 1}}
+                  :neigbours #{2 5}
+                  }
+               2 {:id 2
+                  :cells #{}
+                  :neigbours #{3}}
+               5 {:id 5
+                  :cells #{}
+                  :neigbours #{3}}
+               }
+          act (process_one_cell acc coord width connectivity ccl_data)
+          ]
+      (is (= act exp)))))
+
+(deftest process_one_cell_test2
+  (testing "process one cell, 2"
+    (let [acc {3 {:id 3,
+                  :cells #{{:x 1, :y 0}}
+                  :neigbours #{5}}}
+          coord {:x 0
+                 :y 1}
+          width 3
+          connectivity 6
+          ccl_data [[{:id 5, :x 0, :y 0} {:id 3, :x 1, :y 0} {:id 1}]
+                    [{:id 2} {:id 3} {:id 4}]
+                    [{:id 4} {:id 6} {:id 7}]]
+          exp {3 {:id 3,
+                  :cells #{{:x 1, :y 0}}
+                  :neigbours #{5}
+                  }
+               2 {:id 2
+                  :cells #{{:x 0, :y 1}}
+                  :neigbours #{5}}
+               5 {:id 5
+                  :cells #{}
+                  :neigbours #{2}}}
+          act (process_one_cell acc coord width connectivity ccl_data)]
+      (is (= act exp)))))
+
