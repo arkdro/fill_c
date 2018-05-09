@@ -38,9 +38,7 @@
   "Add the current id to the neigbours of a node and then add this updated node
   to the accumulator"
   [acc {:keys [id]} current_id]
-  (let [{:keys [neigbours] :as node} (get acc id {:id id
-                                                  :neigbours #{}
-                                                  :cells #{}})
+  (let [{:keys [neigbours] :as node} (get acc id (fresh_node id))
         new_neigbours (conj neigbours current_id)
         new_node (assoc node :neigbours new_neigbours)]
     (assoc acc id new_node)))
