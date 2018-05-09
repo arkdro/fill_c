@@ -91,9 +91,11 @@
         [same_id different_ids] (get_neigbours id coord width connectivity
                                                ccl_data)
         node (get_node acc id)
-        new_node (add_neigbours_to_node node same_id different_ids)
+        node_at_current_coord (assoc coord :id id)
+        same_id_all (conj same_id node_at_current_coord)
+        new_node (add_neigbours_to_node node same_id_all different_ids)
         acc2 (add_neigbours_to_graph acc id different_ids)
-        acc3 (put_node acc2 id node)]
+        acc3 (put_node acc2 id new_node)]
     acc3))
 
 (defn build_graph
