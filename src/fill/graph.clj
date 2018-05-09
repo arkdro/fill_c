@@ -6,6 +6,12 @@
 ;; neigbour nodes
 ;; cells
 
+(defn fresh_node
+  [id]
+  {:id id
+   :cells #{}
+   :neigbours #{}})
+
 (defn add_same_id_cells_to_node
   "Add cells with the same node id to a node"
   [{:keys [cells] :as node} cells_to_add]
@@ -50,8 +56,10 @@
   (get-in ccl_data [y x :id]))
 
 (defn get_node
+  "Fetch a node from the accumulator by id.
+  Return default in case of a new node"
   [acc id]
-  (get acc id))
+  (get acc id (fresh_node id)))
 
 (defn put_node
   [acc id node]
