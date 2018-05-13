@@ -296,3 +296,71 @@
           act (process_one_cell acc coord width connectivity ccl_data)]
       (is (= act exp)))))
 
+(deftest build_graph_test1
+  (testing "build graph, 1"
+    (let [width 3
+          height 3
+          connectivity 6
+          ccl_data [[{:id 5 :x 0 :y 0} {:id 3 :x 1 :y 0} {:id 1 :x 2 :y 0}]
+                    [{:id 2 :x 0 :y 1} {:id 3 :x 1 :y 1} {:id 4 :x 2 :y 1}]
+                    [{:id 4 :x 0 :y 2} {:id 6 :x 1 :y 2} {:id 7 :x 2 :y 2}]]
+          exp {1 {:id 1
+                  :cells #{{:x 2, :y 0}}
+                  :neigbours #{3 4}}
+               2 {:id 2
+                  :cells #{{:x 0, :y 1}}
+                  :neigbours #{3 4 5}}
+               3 {:id 3
+                  :cells #{{:x 1, :y 0}
+                           {:x 1, :y 1}}
+                  :neigbours #{1 2 4 5 6}}
+               4 {:id 4
+                  :cells #{{:x 2, :y 1}
+                           {:x 0, :y 2}}
+                  :neigbours #{1 2 3 6 7}}
+               5 {:id 5
+                  :cells #{{:x 0, :y 0}}
+                  :neigbours #{2 3}}
+               6 {:id 6
+                  :cells #{{:x 1, :y 2}}
+                  :neigbours #{3 4 7}}
+               7 {:id 7
+                  :cells #{{:x 2, :y 2}}
+                  :neigbours #{4 6}}}
+          act (build_graph width height connectivity ccl_data)]
+      (is (= act exp)))))
+
+(deftest build_graph_test2
+  (testing "build graph, 2"
+    (let [width 3
+          height 3
+          connectivity 8
+          ccl_data [[{:id 5 :x 0 :y 0} {:id 3 :x 1 :y 0} {:id 1 :x 2 :y 0}]
+                    [{:id 2 :x 0 :y 1} {:id 3 :x 1 :y 1} {:id 4 :x 2 :y 1}]
+                    [{:id 4 :x 0 :y 2} {:id 6 :x 1 :y 2} {:id 7 :x 2 :y 2}]]
+          exp {1 {:id 1
+                  :cells #{{:x 2, :y 0}}
+                  :neigbours #{3 4}}
+               2 {:id 2
+                  :cells #{{:x 0, :y 1}}
+                  :neigbours #{3 4 5 6}}
+               3 {:id 3
+                  :cells #{{:x 1, :y 0}
+                           {:x 1, :y 1}}
+                  :neigbours #{1 2 4 5 6 7}}
+               4 {:id 4
+                  :cells #{{:x 2, :y 1}
+                           {:x 0, :y 2}}
+                  :neigbours #{1 2 3 6 7}}
+               5 {:id 5
+                  :cells #{{:x 0, :y 0}}
+                  :neigbours #{2 3}}
+               6 {:id 6
+                  :cells #{{:x 1, :y 2}}
+                  :neigbours #{2 3 4 7}}
+               7 {:id 7
+                  :cells #{{:x 2, :y 2}}
+                  :neigbours #{3 4 6}}}
+          act (build_graph width height connectivity ccl_data)]
+      (is (= act exp)))))
+
