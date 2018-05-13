@@ -2,11 +2,12 @@
   (:require [ccl.coordinates]))
 
 (defn merge_one_color_at_coordinates
-  "Get a label from ccl data using coordinates and put the label
-  and a color into an accumulator"
+  "Get a label from ccl data using coordinates and put the label, a color
+  and the coordinates into an accumulator"
   [data {:keys [x y] :as coord} color one_color_ccl_data]
   (let [label (get-in one_color_ccl_data [y x])
-        val {:l label, :c color}]
+        id {:l label, :c color}
+        val {:id id, :x x, :y y}]
     (if (pos-int? label)
       (assoc-in data [y x] val)
       data)))
