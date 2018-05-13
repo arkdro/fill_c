@@ -101,11 +101,7 @@
 (defn build_graph
   "Build a graph from merged ccl data"
   [width height connectivity ccl_data]
-  (let [
-        coordinates (ccl.coordinates/generate_coordinates width height)
-        acc {}
-        ]
+  (let [coordinates (ccl.coordinates/generate_coordinates width height)
+        acc {}]
     (reduce #(process_one_cell %1 %2 width connectivity ccl_data)
-            acc coordinates)
-    )
-  )
+            acc coordinates)))
