@@ -113,6 +113,14 @@
           ]
       (is (= act exp)))))
 
+(deftest make_node_id_test
+  (testing "make_node_id"
+    (let [color 31
+          label 1234
+          act (make_node_id color label)
+          exp "31_1234"]
+      (is (= act exp)))))
+
 (deftest build_node_info_test
   (testing "build_node_info"
     (let [color 31
