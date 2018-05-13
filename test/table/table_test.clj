@@ -16,7 +16,7 @@
                                               one_color_ccl_data)
           exp [[0 0 0]
                [0 0 0]
-               [0 {:c 3, :l 1} 0]]]
+               [0 {:id {:c 3, :l 1}, :x 1, :y 2} 0]]]
       (is (= act exp)))))
 
 (deftest merge_one_color_test
@@ -35,9 +35,13 @@
                :color color
                :data data}
           act (merge_one_color acc one_color_ccl_data)
-          exp_data [[1 2 {:c 5, :l 2} 4]
-                    [5 {:c 5, :l 1} 7 {:c 5, :l 2}]
-                    [{:c 5, :l 1} 10 {:c 5, :l 1} {:c 5, :l 1}]]
+          exp_data [[1 2 {:id {:c 5, :l 2}, :x 2, :y 0} 4]
+                    [5 {:id {:c 5, :l 1}, :x 1, :y 1}
+                     7 {:id {:c 5, :l 2}, :x 3, :y 1}]
+                    [{:id {:c 5, :l 1}, :x 0, :y 2}
+                     10
+                     {:id {:c 5, :l 1}, :x 2, :y 2}
+                     {:id {:c 5, :l 1}, :x 3, :y 2}]]
           exp {:width width
                :height height
                :color (inc color)
@@ -70,17 +74,41 @@
                      [:no :no :no 3 :no :no :no :no :no]
                      [:no :no :no 3 :no 4 :no 5 :no]]]
           act (merge_ccl_data width height ccl_data)
-          exp [[{:c 3, :l 1} {:c 2, :l 1} {:c 2, :l 1} {:c 2, :l 1}
-                {:c 2, :l 1} {:c 2, :l 1} {:c 3, :l 2} {:c 3, :l 2}
-                {:c 3, :l 2}]
-               [{:c 3, :l 1} {:c 2, :l 1} {:c 2, :l 1} {:c 0, :l 1}
-                {:c 0, :l 1} {:c 2, :l 1} {:c 2, :l 1} {:c 2, :l 1}
-                {:c 1, :l 1}]
-               [{:c 0, :l 1} {:c 0, :l 1} {:c 0, :l 1} {:c 3, :l 3}
-                {:c 0, :l 1} {:c 1, :l 1} {:c 1, :l 1} {:c 1, :l 1}
-                {:c 1, :l 1}]
-               [{:c 2, :l 2} {:c 0, :l 1} {:c 0, :l 1} {:c 3, :l 3}
-                {:c 0, :l 1} {:c 3, :l 4} {:c 1, :l 1} {:c 3, :l 5}
-                {:c 0, :l 3}]]
+          exp [[{:id {:c 3, :l 1} :x 0 :y 0}
+                {:id {:c 2, :l 1} :x 1 :y 0}
+                {:id {:c 2, :l 1} :x 2 :y 0}
+                {:id {:c 2, :l 1} :x 3 :y 0}
+                {:id {:c 2, :l 1} :x 4 :y 0}
+                {:id {:c 2, :l 1} :x 5 :y 0}
+                {:id {:c 3, :l 2} :x 6 :y 0}
+                {:id {:c 3, :l 2} :x 7 :y 0}
+                {:id {:c 3, :l 2} :x 8 :y 0}]
+               [{:id {:c 3, :l 1} :x 0 :y 1}
+                {:id {:c 2, :l 1} :x 1 :y 1}
+                {:id {:c 2, :l 1} :x 2 :y 1}
+                {:id {:c 0, :l 1} :x 3 :y 1}
+                {:id {:c 0, :l 1} :x 4 :y 1}
+                {:id {:c 2, :l 1} :x 5 :y 1}
+                {:id {:c 2, :l 1} :x 6 :y 1}
+                {:id {:c 2, :l 1} :x 7 :y 1}
+                {:id {:c 1, :l 1} :x 8 :y 1}]
+               [{:id {:c 0, :l 1} :x 0 :y 2}
+                {:id {:c 0, :l 1} :x 1 :y 2}
+                {:id {:c 0, :l 1} :x 2 :y 2}
+                {:id {:c 3, :l 3} :x 3 :y 2}
+                {:id {:c 0, :l 1} :x 4 :y 2}
+                {:id {:c 1, :l 1} :x 5 :y 2}
+                {:id {:c 1, :l 1} :x 6 :y 2}
+                {:id {:c 1, :l 1} :x 7 :y 2}
+                {:id {:c 1, :l 1} :x 8 :y 2}]
+               [{:id {:c 2, :l 2} :x 0 :y 3}
+                {:id {:c 0, :l 1} :x 1 :y 3}
+                {:id {:c 0, :l 1} :x 2 :y 3}
+                {:id {:c 3, :l 3} :x 3 :y 3}
+                {:id {:c 0, :l 1} :x 4 :y 3}
+                {:id {:c 3, :l 4} :x 5 :y 3}
+                {:id {:c 1, :l 1} :x 6 :y 3}
+                {:id {:c 3, :l 5} :x 7 :y 3}
+                {:id {:c 0, :l 3} :x 8 :y 3}]]
           ]
       (is (= act exp)))))
