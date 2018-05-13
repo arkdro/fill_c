@@ -1,6 +1,10 @@
 (ns table.table
   (:require [ccl.coordinates]))
 
+(defn make_node_id
+  [color label]
+  (format "%d_%d" color label))
+
 (defn merge_one_color_at_coordinates
   "Get a label from ccl data using coordinates and put the label, a color
   and the coordinates into an accumulator"
