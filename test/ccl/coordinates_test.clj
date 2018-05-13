@@ -1,4 +1,4 @@
-(ns ccl.ccl_test
+(ns ccl.coordinates_test
   (:require [clojure.test :refer :all]
             [ccl.coordinates :refer :all]))
 
