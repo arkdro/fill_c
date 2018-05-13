@@ -112,3 +112,14 @@
                 {:id {:c 0, :l 3} :x 8 :y 3}]]
           ]
       (is (= act exp)))))
+
+(deftest build_node_info_test
+  (testing "build_node_info"
+    (let [color 31
+          label 1234
+          x 2
+          y 5
+          act (build_node_info color label x y)
+          exp {:id "31_1234" :x 2 :y 5}]
+      (is (= act exp)))))
+
