@@ -28,11 +28,6 @@
   [expected {:keys [ccl-output-background]}]
   (mapv #(replace_background_points_one_item ccl-output-background %) expected))
 
-(defn generate_expected_graph
-  [width height {connectivity :connectivity} data]
-  (let [ccl_data (table.table/merge_ccl_data width height data)]
-    (fill.graph/build_graph width height connectivity ccl_data)))
-
 (defn generate_one_request
   "Generate one ccl request"
   [width height color_range opts]
@@ -44,9 +39,12 @@
         expected (generate_expected_data width height color_range opts
                                          data)
         expected2 (replace_background_points expected opts)
-        graph (generate_expected_graph width height opts expected)
+        connectivity (get opts :connectivity)
+        merged_ccl_data (table.table/merge_ccl_data width height expected)
+        graph (fill.graph/build_graph width height connectivity merged_ccl_data)
         request {:input_data plate
                  :expected_data expected2
+                 :expected_merged_ccl_data merged_ccl_data
                  :expected_graph graph}]
     (generate_json_string request opts)))
 
