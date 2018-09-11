@@ -3,6 +3,7 @@
   (:require [fill.by_points]
             [fill.generator]
             [fill.plate]
+            [graphics.bom]
             [ccl.generator])
   (:gen-class))
 
@@ -13,8 +14,12 @@
 
 (def cli-options
   ;; An option with a required argument
-  [["-t" "--type T" "type of request: fill or ccl"
-    :validate [#(or (= "fill" %) (= "ccl" %)) "Must be fill or ccl"]]
+  [["-t" "--type T" "type of request: gr, fill or ccl"
+    :validate [#(or
+                 (= "gr" %)
+                 (= "fill" %)
+                 (= "ccl" %))
+               "Must be gr, fill or ccl"]]
    [nil "--ccl-output-background STRING"
     "Default string for background in ccl output"
     :parse-fn #(read-string %)
@@ -91,6 +96,7 @@
     (cond
       help (println (get opts :summary))
       errors (println errors)
+      (= type "gr") (graphics.bom/run options)
       (= type "fill") (fill.generator/generate-requests options)
       (= type "ccl") (ccl.generator/generate-requests options)
       :default (println (get opts :summary)))))

@@ -5,7 +5,9 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/tools.cli "0.3.5"]
-                 [cheshire "5.8.0"]]
+                 [org.clojure/tools.logging "0.4.0"]
+                 [cheshire "5.8.0"]
+                 [quil "2.6.0"]]
   :main ^:skip-aot fill.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
