@@ -46,6 +46,12 @@
                  :expected_data expected2
                  :expected_merged_ccl_data merged_ccl_data
                  :expected_graph graph}]
+    request))
+
+(defn generate_one_json_request
+  "Generate one ccl request and return it as a json text"
+  [width height color_range opts]
+  (let [request (generate_one_request width height color_range opts)]
     (generate_json_string request opts)))
 
 (defn build_file_name
@@ -63,6 +69,6 @@
 (defn generate_request
   "Create a request file in the specified directory"
   [dir idx width height color_range opts]
-  (let [request (generate_one_request width height color_range opts)]
+  (let [request (generate_one_json_request width height color_range opts)]
     (write_request dir idx request)))
 
