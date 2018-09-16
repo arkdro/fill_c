@@ -1,10 +1,11 @@
 (ns fill.core
   (:require [clojure.tools.cli :refer [parse-opts]])
-  (:require [fill.by_points]
-            [fill.generator]
-            [fill.plate]
-            [graphics.bom]
-            [ccl.generator])
+  (:require
+   [board.board]
+   [fill.by_points]
+   [fill.generator]
+   [fill.plate]
+   [ccl.generator])
   (:gen-class))
 
 (defn get_random_color
@@ -96,7 +97,7 @@
     (cond
       help (println (get opts :summary))
       errors (println errors)
-      (= type "gr") (graphics.bom/run options)
+      (= type "gr") (board.board/run options)
       (= type "fill") (fill.generator/generate-requests options)
       (= type "ccl") (ccl.generator/generate-requests options)
       :default (println (get opts :summary)))))
