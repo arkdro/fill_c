@@ -37,8 +37,8 @@
 
 (defn split_neighbours_by_color
   "Partition neighbours by color into matching and non-matching nodes"
-  [{:keys [data merged_data] :as board} neighbours color]
-  (let [colors_by_ids (build_neighbour_colors data merged_data neighbours)
+  [{:keys [data graph] :as board} neighbours color]
+  (let [colors_by_ids (build_neighbour_colors data graph neighbours)
         {matching true
          non_matching false} (group-by #(match_color? colors_by_ids color %)
                                        neighbours)]
