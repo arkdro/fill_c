@@ -20,6 +20,12 @@
   (let [cells (get-in graph [id :cells])]
     (first cells)))
 
+(defn add_one_node_to_color_mapping
+  [data graph acc id]
+  (let [coord (get_node_coordinates graph id)
+        color (get_color data coord)]
+    (assoc acc id color)))
+
 (defn match_color?
   [colors_by_ids color id]
   (= (get colors_by_ids id) color))
