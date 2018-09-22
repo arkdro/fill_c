@@ -1,6 +1,10 @@
 (ns board.board
   "Create a board based on parameters"
-  (:require [graphics.bom]))
+  (:require
+   [ccl.request]
+   [graphics.bom]
+   ))
+
 
 (defn run
   [options]
