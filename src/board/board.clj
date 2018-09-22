@@ -10,6 +10,11 @@
   [merged_data {x :x, y :y}]
   (get-in merged_data [y x :id]))
 
+(defn get_color
+  "Get a color from input data at given coordinates"
+  [data {x :x, y :y}]
+  (get-in data [y x]))
+
 
 (defn run
   [options]
