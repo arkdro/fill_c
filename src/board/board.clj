@@ -26,6 +26,11 @@
         color (get_color data coord)]
     (assoc acc id color)))
 
+(defn build_neighbour_colors
+  "Build a map of id -> color for given nodes"
+  [data graph nodes]
+  (reduce #(add_one_node_to_color_mapping data graph %1 %2) {} nodes))
+
 (defn match_color?
   [colors_by_ids color id]
   (= (get colors_by_ids id) color))
