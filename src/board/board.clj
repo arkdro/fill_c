@@ -15,6 +15,11 @@
   [data {x :x, y :y}]
   (get-in data [y x]))
 
+(defn get_node_coordinates
+  [graph id]
+  (let [cells (get-in graph [id :cells])]
+    (first cells)))
+
 (defn match_color?
   [colors_by_ids color id]
   (= (get colors_by_ids id) color))
