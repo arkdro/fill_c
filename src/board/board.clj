@@ -15,6 +15,10 @@
   [data {x :x, y :y}]
   (get-in data [y x]))
 
+(defn match_color?
+  [colors_by_ids color id]
+  (= (get colors_by_ids id) color))
+
 
 (defn run
   [options]
