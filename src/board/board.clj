@@ -19,6 +19,15 @@
   [colors_by_ids color id]
   (= (get colors_by_ids id) color))
 
+(defn split_neighbours_by_color
+  "Partition neighbours by color into matching and non-matching nodes"
+  [{:keys [data merged_data] :as board} neighbours color]
+  (let [colors_by_ids (build_neighbour_colors data merged_data neighbours)
+        {matching true
+         non_matching false} (group-by #(match_color? colors_by_ids color %)
+                                       neighbours)]
+    [matching non_matching]))
+
 
 (defn run
   [options]
