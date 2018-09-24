@@ -48,6 +48,12 @@
                                        neighbours)]
     [matching non_matching]))
 
+(defn get_one_next_hop_neighbours
+  [graph acc id]
+  (let [node (get_node_from_graph graph id)
+        neighbours (get :neighbours node)]
+    (clojure.set/union acc neighbours)))
+
 
 (defn run
   [options]
