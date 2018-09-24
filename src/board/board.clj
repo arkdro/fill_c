@@ -54,6 +54,10 @@
         neighbours (get :neighbours node)]
     (clojure.set/union acc neighbours)))
 
+(defn get_next_hop_neighbours
+  [{:keys [graph]} neighbours]
+  (reduce #(get_one_next_hop_neighbours graph %1 %2) #{} neighbours))
+
 
 (defn run
   [options]
