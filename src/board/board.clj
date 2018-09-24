@@ -81,6 +81,23 @@
                        :id owner}]
     (run_color board initial_party (get_color data start))))
 
+(defn prepare_state
+  [data merged_data graph]
+  (let [board {:width width
+               :height height
+               :data data
+               :merged_data merged_data
+               :graph graph}
+        owner1 :p1
+        owner2 :p2
+        start1 {:x 0, :y 0}
+        start2 {:x (dec width), :y (dec height)}
+        [board1 party1] (prepare_party owner1 start1 board)
+        [board2 party2] (prepare_party owner2 start2 board1)
+        state {:board board2
+               :party1 party1
+               :party2 party2}]
+    state))
 
 (defn run
   [options]
