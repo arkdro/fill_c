@@ -71,6 +71,16 @@
         new_board (update_board board matching owner)]
     [new_board new_party]))
 
+(defn prepare_party
+  "Use a start node as a clean start"
+  [owner start {:keys [data merged_data] :as board}]
+  (let [node (get_node merged_data start)
+        initial_party {:neighbours #{node}
+                       :consumed_nodes #{}
+                       :color nil
+                       :id owner}]
+    (run_color board initial_party (get_color data start))))
+
 
 (defn run
   [options]
