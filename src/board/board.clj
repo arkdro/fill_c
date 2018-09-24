@@ -58,6 +58,19 @@
   [{:keys [graph]} neighbours]
   (reduce #(get_one_next_hop_neighbours graph %1 %2) #{} neighbours))
 
+(defn run_color
+  [board {:keys [neighbours] :as party} new_color]
+  (let [[matching non_matching] (split_neighbours_by_color board
+                                                           neighbours
+                                                           new_color)
+        next_hop_neighbours (get_next_hop_neighbours board matching)
+        merged_neighbours (merge_neighbours non_matching next_hop_neighbours)
+        ;; removing nodes which are already consumed by any party
+        new_neighbours (remove_consumed_neighbours merged_neighbours)
+        new_consumed_nodes (update_consumed_nodes consumed_nodes matching)
+        new_board (update_board board matching owner)]
+    [new_board new_party]))
+
 
 (defn run
   [options]
