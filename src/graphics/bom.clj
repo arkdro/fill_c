@@ -2,6 +2,8 @@
   (:gen-class)
   (:require [quil.core :as qc]
             [quil.middleware :as qmid]
+            [clojure.core.async :as a :refer
+             [>! <! >!! <!! go chan close! thread alts! alts!! timeout]]
             [clojure.tools.logging :as log]
             [clojure.pprint :refer :all])
   (:import java.lang.Math))
@@ -179,22 +181,23 @@
 
 (defn setup
   "Setup the UI"
-  []
+  [initial_board]
   (let [;; _ (qc/smooth) ;; Enable AA
         ;; _ (qc/frame-rate 10)
         state {:i 0
-               :buffer buffer}]
+               :buffer buffer
+               :board initial_board}]
     (qc/no-loop)
     state))
 
-(defn run [{:keys [width height scale]}]
+(defn run [{:keys [width height scale]} initial_board]
   (let [width (or width 10)
         height (or height 10)
         scale (or scale 50)]
     ;; Initialize the graphics
     (qc/defsketch fill
       :title "Fill"
-      :setup setup
+      :setup (fn setup_fn [] (setup initial_board))
       ;; :no-bind-output is here to handle nil id for nREPL.
       ;; See quil issue #217 and cider issue #2138
       :features [:no-bind-output]
@@ -206,6 +209,21 @@
       :size [(+ width width (* scale width))
              (+ height height (* scale height))])))
 
+(def state
+  (atom 0))
+
+(defn state_runner
+  [val]
+  (let [new_val (mod (inc val) 8)]
+    (reset! state val)
+    (Thread/sleep 253)
+    (recur new_val)))
+
+(defn run_state_manager
+  []
+  (thread (state_runner 0)))
+
 (defn -main [& args]
+  (run_state_manager)
   (run {:width 20 :height 20 :scale 20}))
 ;; (graphics.bom/run {:width 40 :height 40 :scale 10})

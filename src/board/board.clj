@@ -58,17 +58,53 @@
   [{:keys [graph]} neighbours]
   (reduce #(get_one_next_hop_neighbours graph %1 %2) #{} neighbours))
 
+(defn merge_neighbours
+  [non_matching next_hop_neighbours]
+  (clojure.set/union non_matching next_hop_neighbours))
+
+(defn remove_consumed_neighbours
+  [board matching merged_neighbours]
+  (let [
+        consumed_nodes (get_all_consumed_nodes board)
+        consumed1 (get_consumed_nodes )
+        ]
+    )
+  )
+
+(defn update_party
+  []
+  (let [
+        not_consumed_neighbours (get_not_consumed_nodes board neighbours)
+        [matching non_matching] (split_neighbours_by_color
+                                 board not_consumed_neighbours new_color)
+        next_hop_neighbours (get_next_hop_neighbours board matching)
+        ;; removing nodes which are already consumed, or prepared
+        ;; to be consumed by any party
+        free_next_hop_neighbours (remove_consumed_neighbours
+                                  board matching next_hop_neighbours)
+        new_neighbours (merge_neighbours non_matching free_next_hop_neighbours)
+        new_consumed_nodes (calc_new_consumed_nodes consumed_nodes matching)
+        ]
+    (assoc party
+           :neighbours new_neighbours
+           :consumed_nodes new_consumed_nodes)
+    )
+  )
+
+(defn update_board
+  (let [
+        (update_board_consumed_nodes )
+        (update_colors )
+        ]
+    )
+  )
+
 (defn run_color
   [board {:keys [neighbours] :as party} new_color]
-  (let [[matching non_matching] (split_neighbours_by_color board
-                                                           neighbours
-                                                           new_color)
-        next_hop_neighbours (get_next_hop_neighbours board matching)
-        merged_neighbours (merge_neighbours non_matching next_hop_neighbours)
-        ;; removing nodes which are already consumed by any party
-        new_neighbours (remove_consumed_neighbours merged_neighbours)
-        new_consumed_nodes (update_consumed_nodes consumed_nodes matching)
-        new_board (update_board board matching owner)]
+  (let [
+        new_party (update_party board party new_color)
+        new_board (update_board board new_party)
+        ]
     [new_board new_party]))
 
 (defn prepare_party
@@ -87,7 +123,8 @@
                :height height
                :data data
                :merged_data merged_data
-               :graph graph}
+               :graph graph
+               :consumed_nodes #{}}
         owner1 :p1
         owner2 :p2
         start1 {:x 0, :y 0}
@@ -100,6 +137,17 @@
     state))
 
 (defn run
-  [options]
-  (graphics.bom/run options)
+  [{:keys [width0 height0 scale0] :as options}]
+  (let [
+        width 4
+        height 4
+        color_range 4
+        board (ccl.request/generate_one_request width height color_range
+                                                options)
+        gr_opts {:width 20
+                 :height 20
+                 :scale 20}
+        ]
+    (graphics.bom/run gr_opts board)
+    )
   )
