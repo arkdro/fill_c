@@ -52,7 +52,8 @@
    }
   )
 
-(def buffer [
+(def test_buffer
+  [
              [7 0 1 2 5]
              [1 7 5 4 3]
              [6 1 1 6 3]
@@ -185,7 +186,7 @@
   (let [;; _ (qc/smooth) ;; Enable AA
         ;; _ (qc/frame-rate 10)
         state {:i 0
-               :buffer buffer
+               :buffer test_buffer
                :board initial_board}]
     (qc/no-loop)
     state))
