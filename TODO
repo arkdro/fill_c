@@ -1,0 +1,40 @@
+# -*- mode:org -*-
+* Ideas
+
+** graphics
+
+- use quil for N fps rendering
+- use quil for on-change rendering
+- based on the plate, build a static image and then use the choosen renderer
+  to display the pre-built image
+  - dump plate to log for debug purpose
+  - build the image
+  - render
+- make own graphic output
+
+** input
+
+- use quil
+- use other lib
+- build own input
+
+** ensure the next move is ready
+
+- fixed choice: first of available colors
+- random choice from available colors
+- greedy choice: max of available colors
+- calculated choice based on the plate analysis
+
+* Steps during the run (big picture)
+
+1. preparation
+   - build plate
+   - build graph from plate
+2. work
+   - show current plate/graph
+   - for every input
+     - get input
+     - update plate/graph
+     - show current plate/graph
+     - check finish
+
